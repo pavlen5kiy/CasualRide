@@ -19,19 +19,25 @@ class Road(Sprite):
         self.score = 0
         self.speed = 5
         self.default_speed = 5
+        self.speed_change = 0
+        self.non_changed_speed = 5
 
     def update(self):
         if self.rect.y >= -10:
             self.rect.y = -970
             self.score += 1
-            self.speed = self.default_speed + self.score // 10
 
+        self.speed = int((self.default_speed + self.score // 20) - 3 * (
+                    self.score // 100) + self.speed_change)
+        self.non_changed_speed = self.speed - self.speed_change
         self.rect.y += self.speed
+        # print(self.speed, self.speed_change)
 
 
 class Car(Sprite):
-    def __init__(self, image, *group):
+    def __init__(self, image, road, npc_group, *group):
         super().__init__(*group)
+        self.default_image = image
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft = (360 - 30, 450 - 52)
@@ -39,34 +45,51 @@ class Car(Sprite):
         self.x_speed = 5
         self.y_movement = 0
         self.y_speed = 2
-        self.hitbox = pygame.Rect(0, 0, 48, 87)
-        self.hitbox.topleft = (360 - 30 + 6, 450 - 52 + 10)
+        self.hitbox = pygame.Rect(0, 0, 44, 83)
+        self.hitbox.topleft = (self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
+        self.npc_group = npc_group
+        self.road = road
 
-    def update(self, npc_group, particles_group):
+    def update(self, particles_group):
 
-        if 0 <= self.rect.x + self.x_speed * self.x_movement <= 420:
+        if 30 <= self.rect.x + self.x_speed * self.x_movement <= 390:
             self.rect.x += self.x_speed * self.x_movement
             self.hitbox.x += self.x_speed * self.x_movement
 
+        speed_change = self.y_speed * -self.y_movement
+
         if self.y_movement == -1:
-            if 0 <= self.rect.y + self.y_speed * 2 * self.y_movement <= 580:
-                self.rect.y += self.y_speed * 2 * self.y_movement
-                self.hitbox.y += self.y_speed * 2 * self.y_movement
+            self.road.speed_change = speed_change * 2
+            for npc in self.npc_group:
+                speed_diff = npc.speed - speed_change * 2
+                if speed_diff < 0:
+                    npc.speed_change = speed_change * 2
+
+        elif self.y_movement == 1:
+            self.road.speed_change = speed_change
+            for npc in self.npc_group:
+                speed_diff = npc.speed - speed_change
+                if speed_diff < 0:
+                    npc.speed_change = speed_change
+                if npc.direction == -1:
+                    if npc.speed >= self.road.speed + speed_change:
+                        npc.speed_change = -(npc.speed + (self.road.speed + speed_change - 3))
         else:
-            if 0 <= self.rect.y + self.y_speed * self.y_movement <= 536:
-                self.rect.y += self.y_speed * self.y_movement
-                self.hitbox.y += self.y_speed * self.y_movement
+            self.road.speed_change = 0
+            for npc in self.npc_group:
+                npc.speed_change = 0
 
         if self.x_movement == -1:
-            self.image = load_image('car_left')
+            self.image = pygame.transform.rotate(self.default_image, 9)
         elif self.x_movement == 1:
-            self.image = load_image('car_right')
+            self.image = pygame.transform.rotate(self.default_image, -9)
         else:
-            self.image = load_image('car')
+            self.image = self.default_image
 
-        for npc in npc_group:
-            if self.rect.colliderect(npc.hitbox):
+        for npc in self.npc_group:
+            if self.hitbox.colliderect(npc.hitbox):
                 return True
+            pass
 
         create_particles(self.rect.center,
                          generate_particles('particle'),
@@ -83,13 +106,13 @@ class NpcCar(Sprite):
         self.direction = direction
         self.rect.topleft = position
         self.speed = speed
-        self.hitbox = pygame.Rect(0, 0, 48, 87)
-        self.hitbox.topleft = (
-            position[0] + (self.rect.width - 48) // 2, position[1] + 10)
+        self.hitbox = pygame.Rect(0, 0, 44, 83)
+        self.hitbox.topleft = (self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
+        self.speed_change = 0
 
     def update(self):
-        self.rect.y += self.speed
-        self.hitbox.y += self.speed
+        self.rect.y += self.speed + self.speed_change
+        self.hitbox.y += self.speed + self.speed_change
         if self.rect.y > 641:
             self.kill()
 
@@ -126,3 +149,21 @@ def generate_particles(filename):
     for scale in (5, 10, 15):
         particles.append(pygame.transform.scale(particles[0], (scale, scale)))
     return particles
+
+
+class Coin(Sprite):
+    def __init__(self, pos, car, road, coins_count, *group):
+        super().__init__(*group)
+        self.image = load_image('coin')
+        self.rect = self.image.get_rect()
+        self.rect.topleft = pos
+        self.car = car
+        self.coins_count = coins_count
+        self.road = road
+
+    def update(self):
+        self.rect.y += self.road.speed
+        if self.rect.colliderect(self.car.rect):
+            self.coins_count.coins_count += 1
+            print(self.coins_count.coins_count)
+            self.kill()

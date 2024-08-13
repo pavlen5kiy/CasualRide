@@ -2,14 +2,8 @@ import pygame
 
 from npc_controller import *
 from set_functions import *
-
-
-def set_music(track):
-    # pygame.mixer.music.stop()
-    pygame.mixer.music.load(f'assets/{track}.mp3')
-    pygame.mixer.music.set_volume(1)
-    pygame.mixer.music.play(-1)
-    print(f'Music on: {track}.')
+from utility import *
+from coins_controller import *
 
 
 def main():
@@ -22,12 +16,16 @@ def main():
     timer = Timer(-1, screen, size)
     timer.seconds = 9
 
+    car_skin = 'yellow'
+
     sprites = pygame.sprite.Group()
     particles = pygame.sprite.Group()
     npc_cars = pygame.sprite.Group()
+    coins = pygame.sprite.Group()
 
     road = Road(load_image('road'), sprites)
-    car = Car(load_image('car'), sprites)
+    car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars, sprites)
+    coins_count = CoinsCount(screen, size, 40, '#f7e26b')
 
     pygame.display.set_caption('Get ready!')
 
@@ -36,9 +34,12 @@ def main():
     running = True
     first_launch = True
 
+    show_rect = False
+    show_hitbox = False
+
     road_speed = road.speed
 
-    (play, lost, start, speed_change, spawn_tick,
+    (play, lost, start, speed_change, spawn_tick, coin_spawn_tick,
      start_label, lose_label, score_label, score_lost_label) = set_game(screen,
                                                                         size,
                                                                         road)
@@ -71,20 +72,27 @@ def main():
                 if event.key == pygame.K_r:
                     sprites = pygame.sprite.Group()
                     npc_cars = pygame.sprite.Group()
+                    coins = pygame.sprite.Group()
 
                     road = Road(load_image('road'), sprites)
-                    car = Car(load_image('car'), sprites)
+                    car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars,
+                              sprites)
 
                     pygame.display.set_caption('Pause')
 
                     timer.seconds = 9
                     road_speed = road.speed
 
-                    (play, lost, start, speed_change, spawn_tick,
+                    (play, lost, start, speed_change, spawn_tick, coin_spawn_tick,
                      start_label, lose_label, score_label,
                      score_lost_label) = set_game(screen,
                                                   size,
                                                   road)
+
+                if event.key == pygame.K_F1:
+                    show_rect = not show_rect
+                if event.key == pygame.K_F2:
+                    show_hitbox = not show_hitbox
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a:
@@ -106,7 +114,8 @@ def main():
             pygame.display.set_caption('Play')
 
             road.update()
-            if car.update(npc_cars, particles):
+
+            if car.update(particles):
                 play = False
                 pygame.display.set_caption('Hehe')
                 lost = True
@@ -121,21 +130,33 @@ def main():
             else:
                 spawn_tick += 1
 
+            for coin in coins:
+                coin.update()
+
+            if coin_spawn_tick == 120:
+                coin_spawn_tick = 0
+                spawn_coins(car, road, coins_count, coins)
+
+            coin_spawn_tick += 1
+
         clock.tick(fps)
 
         # particles.update(screen_rect)
         screen.fill(pygame.Color('black'))
         sprites.draw(screen)
+        coins.draw(screen)
         npc_cars.draw(screen)
         # particles.draw(screen)
 
-        # render_hitbox(screen, car, npc_cars)
+        render_hitbox(screen, car, npc_cars, show_rect, show_hitbox)
 
         if lost:
             lose_label.update()
             score_lost_label.update()
         else:
             score_label.update()
+
+        coins_count.update()
 
         timer.update()
 

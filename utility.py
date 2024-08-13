@@ -23,11 +23,20 @@ def load_image(name, color_key=None):
     return image
 
 
-def render_hitbox(screen, car, npc_cars):
-    pygame.draw.rect(screen, pygame.Color('blue'), car.rect)
+def render_hitbox(screen, car, npc_cars, rect=True, hitbox=True):
+    if rect:
+        pygame.draw.rect(screen, pygame.Color('blue'), car.rect)
 
     for npc in npc_cars:
-        pygame.draw.rect(screen, pygame.Color('purple'), npc.rect)
-        pygame.draw.rect(screen, pygame.Color('red'), npc.hitbox)
+        if rect:
+            pygame.draw.rect(screen, pygame.Color('purple'), npc.rect)
+        if hitbox:
+            pygame.draw.rect(screen, pygame.Color('red'), npc.hitbox)
 
-    pygame.draw.rect(screen, pygame.Color('green'), car.hitbox)
+    if hitbox:
+        pygame.draw.rect(screen, pygame.Color('green'), car.hitbox)
+
+
+def change_skin(car, skin):
+    car.default_image = load_image(f'car_{skin}_up')
+    car.image = load_image(f'car_{skin}_up')

@@ -31,9 +31,18 @@ def set_game(screen, size, road):
 
     speed_change = 0
     spawn_tick = 0
+    coin_spawn_tick = 0
 
     start_label = Startlabel(5, screen, size)
 
     lose_label, score_label, score_lost_label = set_labels(screen, size, road)
 
-    return play, lost, start, speed_change, spawn_tick, start_label, lose_label, score_label, score_lost_label
+    return play, lost, start, speed_change, spawn_tick, coin_spawn_tick, start_label, lose_label, score_label, score_lost_label
+
+
+def set_music(track):
+    # pygame.mixer.music.stop()
+    pygame.mixer.music.load(f'assets/{track}.mp3')
+    pygame.mixer.music.set_volume(1)
+    pygame.mixer.music.play(-1)
+    print(f'Music on: {track}.')

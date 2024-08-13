@@ -70,3 +70,14 @@ class Startlabel(Timer):
             self.screen.blit(output, (
                 self.width // 2 - output.get_width() // 2,
                 self.height // 2 - output.get_height() // 2 + 70 * i - 100))
+
+
+class CoinsCount(Text):
+    def __init__(self, screen, screen_size, font_size, color, dest=(0, 0)):
+        self.coins_count = 0
+        super().__init__(screen, screen_size, font_size, str(self.coins_count), color, dest)
+
+    def update(self):
+        self.render = self.font.render(str(self.coins_count), True, self.color)
+        self.dest = (self.width - self.render.get_width() - 10, 10)
+        self.screen.blit(self.render, self.dest)
