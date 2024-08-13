@@ -4,10 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Initial commit">
-      <change afterPath="$PROJECT_DIR$/assets/particle.png" afterDir="false" />
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Started working on particles">
+      <change afterPath="$PROJECT_DIR$/npc_controller.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/set_functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/secret things.py" beforeDir="false" afterPath="$PROJECT_DIR$/secret things.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
@@ -103,7 +106,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723490207132</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Started working on particles">
+      <option name="closed" value="true" />
+      <created>1723494524295</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1723494524295</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -119,6 +130,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Initial commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="Initial commit" />
+    <MESSAGE value="Started working on particles" />
+    <option name="LAST_COMMIT_MESSAGE" value="Started working on particles" />
   </component>
 </project>

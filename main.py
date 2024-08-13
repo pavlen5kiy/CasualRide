@@ -1,45 +1,7 @@
-from sprite_controller import *
-from load_image import *
-from ui import *
-
-import random
 import pygame
 
-
-def set_npc(sprites, road, x_pos):
-    images = ['car_blue', 'car_green', 'car_brown']
-    directions = [1, -1]
-
-    direction = random.choice(directions)
-    image = random.choice(images)
-
-    if direction == 1:
-        image += '_down'
-    else:
-        image += '_up'
-
-    if direction == -1:
-        speed = random.randrange(1, road.speed)
-    else:
-        speed = random.randrange(road.speed + 1, road.speed + 4)
-
-    if direction == 1:
-        speed += road.speed
-
-    y_position = -random.randrange(110, 500)
-    car = NpcCar(load_image(image), direction, (x_pos, y_position), speed,
-                 sprites)
-
-    sprites.add(car)
-
-
-def spawn_npc(sprites, road):
-    for i in range(4):
-        if random.randrange(1, 3) == 2:
-            continue
-        else:
-            offset = random.randrange(1, 10) * random.choice([1, -1])
-            set_npc(sprites, road, 40 + 100 * i + offset)
+from npc_controller import *
+from set_functions import *
 
 
 def set_music(track):
@@ -51,18 +13,14 @@ def set_music(track):
 
 
 def main():
-    clock = pygame.time.Clock()
     pygame.init()
+    clock = pygame.time.Clock()
 
-    size = 480, 640
-    screen = pygame.display.set_mode(size)
-    screen_rect = (0, 0, size[0], size[1])
+    screen, size, screen_rect = set_screen((480, 640))
+    set_music('GetUpAction')
 
     timer = Timer(-1, screen, size)
-
-    font = pygame.font.Font('assets/PixelOperator8-Bold.ttf', 40)
-
-    set_music('GetUpAction')
+    timer.seconds = 9
 
     sprites = pygame.sprite.Group()
     particles = pygame.sprite.Group()
@@ -76,17 +34,14 @@ def main():
     fps = 60
 
     running = True
-    play = False
-    lost = False
-    start = False
     first_launch = True
 
     road_speed = road.speed
-    speed_change = 0
-    spawn_tick = 0
 
-    timer.seconds = 9
-    start_label = Start_label(5, screen, size)
+    (play, lost, start, speed_change, spawn_tick,
+     start_label, lose_label, score_label, score_lost_label) = set_game(screen,
+                                                                        size,
+                                                                        road)
 
     while running:
         for event in pygame.event.get():
@@ -122,12 +77,14 @@ def main():
 
                     pygame.display.set_caption('Pause')
 
-                    play = False
-                    lost = False
-                    start = False
-                    spawn_tick = 0
-
                     timer.seconds = 9
+                    road_speed = road.speed
+
+                    (play, lost, start, speed_change, spawn_tick,
+                     start_label, lose_label, score_label,
+                     score_lost_label) = set_game(screen,
+                                                  size,
+                                                  road)
 
             if event.type == pygame.KEYUP:
                 if event.key == pygame.K_a:
@@ -172,23 +129,13 @@ def main():
         npc_cars.draw(screen)
         # particles.draw(screen)
 
-        # pygame.draw.rect(screen, pygame.Color('blue'), car.rect)
-        #
-        # for npc in npc_cars:
-        #     pygame.draw.rect(screen, pygame.Color('purple'), npc.rect)
-        #     pygame.draw.rect(screen, pygame.Color('red'), npc.hitbox)
-        #
-        # pygame.draw.rect(screen, pygame.Color('green'), car.hitbox)
-
-        lose_output = font.render('You lost!', True, 'black')
-        score_output = font.render(str(road.score), True, 'white')
-        score_output_black = font.render(f'Score: {road.score}', True, 'black')
+        # render_hitbox(screen, car, npc_cars)
 
         if lost:
-            screen.blit(lose_output, ((size[0] - lose_output.get_width()) // 2, 100))
-            screen.blit(score_output_black, ((size[0] - score_output_black.get_width()) // 2, 150))
+            lose_label.update()
+            score_lost_label.update()
         else:
-            screen.blit(score_output, (10, 10))
+            score_label.update()
 
         timer.update()
 

@@ -1,7 +1,8 @@
-import pygame
-from load_image import load_image
-
 import random
+
+import pygame
+
+from utility import load_image
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -84,7 +85,7 @@ class NpcCar(Sprite):
         self.speed = speed
         self.hitbox = pygame.Rect(0, 0, 48, 87)
         self.hitbox.topleft = (
-        position[0] + (self.rect.width - 48) // 2, position[1] + 10)
+            position[0] + (self.rect.width - 48) // 2, position[1] + 10)
 
     def update(self):
         self.rect.y += self.speed

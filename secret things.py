@@ -135,7 +135,7 @@ class Car(Sprite):
 
 
 from sprite_controller import *
-from load_image import *
+from utility import *
 
 import random
 import pygame

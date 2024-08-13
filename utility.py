@@ -1,4 +1,5 @@
 import os
+
 import pygame
 
 
@@ -20,3 +21,13 @@ def load_image(name, color_key=None):
         image = image.convert_alpha()
 
     return image
+
+
+def render_hitbox(screen, car, npc_cars):
+    pygame.draw.rect(screen, pygame.Color('blue'), car.rect)
+
+    for npc in npc_cars:
+        pygame.draw.rect(screen, pygame.Color('purple'), npc.rect)
+        pygame.draw.rect(screen, pygame.Color('red'), npc.hitbox)
+
+    pygame.draw.rect(screen, pygame.Color('green'), car.hitbox)
