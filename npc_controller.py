@@ -24,7 +24,7 @@ def set_npc(sprites, road, x_pos):
     if direction == 1:
         speed += road.speed
 
-    y_position = -random.randrange(110, 500)
+    y_position = -random.randrange(110, 330)
     car = NpcCar(load_image(image), direction, (x_pos, y_position), speed,
                  sprites)
 
@@ -33,8 +33,8 @@ def set_npc(sprites, road, x_pos):
 
 def spawn_npc(sprites, road):
     for i in range(4):
-        if random.randrange(1, 3) == 2:
+        if random.randrange(1, 3 + road.score // 50) == 2:
             continue
         else:
-            offset = random.randrange(1, 10) * random.choice([1, -1])
-            set_npc(sprites, road, 40 + 100 * i + offset)
+            offset = random.randrange(1, 20) * random.choice([1, -1])
+            set_npc(sprites, road, 50 + 100 * i + offset)

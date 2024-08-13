@@ -11,20 +11,21 @@ def main():
     clock = pygame.time.Clock()
 
     screen, size, screen_rect = set_screen((480, 640))
-    set_music('GetUpAction')
+    # set_music('GetUpAction')
 
     timer = Timer(-1, screen, size)
     timer.seconds = 9
 
-    car_skin = 'yellow'
+    car_skin = 'pink'
 
     sprites = pygame.sprite.Group()
     particles = pygame.sprite.Group()
     npc_cars = pygame.sprite.Group()
     coins = pygame.sprite.Group()
+    player = pygame.sprite.Group()
 
     road = Road(load_image('road'), sprites)
-    car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars, sprites)
+    car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars, player)
     coins_count = CoinsCount(screen, size, 40, '#f7e26b')
 
     pygame.display.set_caption('Get ready!')
@@ -55,17 +56,17 @@ def main():
                             play = not play
                             if not play:
                                 pygame.display.set_caption('Pause')
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                     if car.rect.x >= 0:
                         car.x_movement = -1
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                     if car.rect.x <= 420:
                         car.x_movement = 1
                     car.x_movement = 1
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     if car.rect.y <= 580:
                         car.y_movement = 1
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w or event.key == pygame.K_UP:
                     if car.rect.y >= 0:
                         car.y_movement = -1
 
@@ -76,7 +77,7 @@ def main():
 
                     road = Road(load_image('road'), sprites)
                     car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars,
-                              sprites)
+                              player)
 
                     pygame.display.set_caption('Pause')
 
@@ -95,13 +96,13 @@ def main():
                     show_hitbox = not show_hitbox
 
             if event.type == pygame.KEYUP:
-                if event.key == pygame.K_a:
+                if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                     car.x_movement = 0
-                if event.key == pygame.K_d:
+                if event.key == pygame.K_d or event.key == pygame.K_RIGHT:
                     car.x_movement = 0
-                if event.key == pygame.K_s:
+                if event.key == pygame.K_s or event.key == pygame.K_DOWN:
                     car.y_movement = 0
-                if event.key == pygame.K_w:
+                if event.key == pygame.K_w or event.key == pygame.K_UP:
                     car.y_movement = 0
 
         if timer.seconds == 0:
@@ -141,12 +142,13 @@ def main():
 
         clock.tick(fps)
 
-        # particles.update(screen_rect)
+        particles.update(screen_rect)
         screen.fill(pygame.Color('black'))
         sprites.draw(screen)
         coins.draw(screen)
         npc_cars.draw(screen)
-        # particles.draw(screen)
+        particles.draw(screen)
+        player.draw(screen)
 
         render_hitbox(screen, car, npc_cars, show_rect, show_hitbox)
 
