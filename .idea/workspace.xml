@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="More cars added, coins added, speed control added">
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Speed control changed, difficulty progression changed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/particle.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/particle.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/npc_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -127,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723556642390</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Speed control changed, difficulty progression changed">
+      <option name="closed" value="true" />
+      <created>1723574908193</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1723574908193</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -146,6 +151,7 @@
     <MESSAGE value="Started working on particles" />
     <MESSAGE value="Cleaned up code a bit" />
     <MESSAGE value="More cars added, coins added, speed control added" />
-    <option name="LAST_COMMIT_MESSAGE" value="More cars added, coins added, speed control added" />
+    <MESSAGE value="Speed control changed, difficulty progression changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Speed control changed, difficulty progression changed" />
   </component>
 </project>

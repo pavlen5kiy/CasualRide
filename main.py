@@ -74,6 +74,7 @@ def main():
                     sprites = pygame.sprite.Group()
                     npc_cars = pygame.sprite.Group()
                     coins = pygame.sprite.Group()
+                    player = pygame.sprite.Group()
 
                     road = Road(load_image('road'), sprites)
                     car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars,
