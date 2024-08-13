@@ -1,5 +1,5 @@
-[WASD] for controls  
+[WASD] or arrows for controls  
 [Space] to Pause/Continue
 [R] to restart  
   
-My highest score is around 100 btw :]
+My highest score is 57 btw :]
