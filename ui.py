@@ -44,7 +44,7 @@ class Timer(Ui):
         self.tick = 0
 
     def render(self):
-        output = self.font.render(str(self.seconds), True, 'black')
+        output = self.font.render(str(self.seconds), True, 'white')
 
         self.screen.blit(output, (self.width // 2 - output.get_width() // 2,
                                   self.height // 2 - output.get_height() // 2))
@@ -75,7 +75,8 @@ class Startlabel(Timer):
 class CoinsCount(Text):
     def __init__(self, screen, screen_size, font_size, color, dest=(0, 0)):
         self.coins_count = 0
-        super().__init__(screen, screen_size, font_size, str(self.coins_count), color, dest)
+        super().__init__(screen, screen_size, font_size, str(self.coins_count),
+                         color, dest)
 
     def update(self):
         self.render = self.font.render(str(self.coins_count), True, self.color)

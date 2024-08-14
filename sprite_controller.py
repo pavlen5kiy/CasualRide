@@ -27,7 +27,8 @@ class Road(Sprite):
             self.rect.y = -970
             self.score += 1
 
-        self.non_changed_speed = int((self.default_speed + self.score // 10) - 3 * (
+        self.non_changed_speed = int(
+            (self.default_speed + self.score // 10) - 3 * (
                     self.score // 50) - 2 * (self.score // 100))
         self.speed = self.non_changed_speed + self.speed_change
         self.rect.y += self.speed
@@ -46,7 +47,8 @@ class Car(Sprite):
         self.y_movement = 0
         self.y_speed = 2
         self.hitbox = pygame.Rect(0, 0, 44, 83)
-        self.hitbox.topleft = (self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
+        self.hitbox.topleft = (
+        self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
         self.npc_group = npc_group
         self.road = road
 
@@ -87,10 +89,11 @@ class Car(Sprite):
                 return True
             pass
 
-        create_particles((self.rect.x + self.rect.width // 2 - 6, self.rect.y + 90),
-                         generate_particles('particle'),
-                         1, self.road.speed, 1,
-                         particles_group)
+        create_particles(
+            (self.rect.x + self.rect.width // 2 - 6, self.rect.y + 90),
+            generate_particles('particle'),
+            1, self.road.speed, 1,
+            particles_group)
 
 
 class NpcCar(Sprite):
@@ -103,7 +106,8 @@ class NpcCar(Sprite):
         self.rect.topleft = position
         self.speed = speed
         self.hitbox = pygame.Rect(0, 0, 44, 83)
-        self.hitbox.topleft = (self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
+        self.hitbox.topleft = (
+        self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
         self.speed_change = 0
         self.road = road
 
@@ -155,9 +159,11 @@ class Particle(Sprite):
 
 
 # Particles functions
-def create_particles(position, particles, particle_count, speed, direction, *group):
+def create_particles(position, particles, particle_count, speed, direction,
+                     *group):
     for _ in range(particle_count):
-        Particle(position, random.randint(-10, 10) / 10, direction * random.randrange(1, 4),
+        Particle(position, random.randint(-10, 10) / 10,
+                 direction * random.randrange(1, 4),
                  particles, speed, *group)
 
 
@@ -182,4 +188,14 @@ class Coin(Sprite):
         self.rect.y += self.road.speed
         if self.rect.colliderect(self.car.rect):
             self.coins_count.coins_count += 1
+            sfx = pygame.mixer.Sound('assets/CoinPickup.mp3')
+            sfx.play()
             self.kill()
+
+
+class UiSprite(Sprite):
+    def __init__(self, image, pos, *group):
+        super().__init__(*group)
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.rect.topleft = pos

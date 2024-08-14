@@ -12,10 +12,10 @@ def set_screen(size):
 
 
 def set_labels(screen, size, road):
-    lose_label = Text(screen, size, 50, 'You lost!', 'black')
+    lose_label = Text(screen, size, 50, 'You lost!', 'white')
     lose_label.dest = ((size[0] - lose_label.render.get_width()) // 2, 100)
 
-    score_lost_label = ScoreLabel(screen, size, 30, 'Score: ', road, 'black')
+    score_lost_label = ScoreLabel(screen, size, 30, 'Score: ', road, 'white')
     score_lost_label.dest = (
         (size[0] // 2 - score_lost_label.render.get_width() // 2) - 20, 150)
 

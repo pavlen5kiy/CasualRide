@@ -5,10 +5,13 @@ from utility import *
 
 
 def set_npc(sprites, road, x_pos):
-    images = ['car_blue', 'car_green', 'car_brown', 'car_red', 'car_yellow', 'car_pink']
+    images = ['car_blue', 'car_green', 'car_brown', 'car_red', 'car_yellow',
+              'car_pink']
     directions = [1, -1]
 
-    direction = random.choice(directions)
+    direction = random.choices(directions, weights=[
+        1 + road.score // 50 + road.score // 100, 2 + road.score // 50], k=1)[
+        0]
     image = random.choice(images)
 
     if direction == 1:
@@ -19,13 +22,15 @@ def set_npc(sprites, road, x_pos):
     if direction == -1:
         speed = random.randrange(1, road.non_changed_speed)
     else:
-        speed = random.randrange(road.non_changed_speed + 1, road.non_changed_speed + road.score // 100 + 3)
+        speed = random.randrange(road.non_changed_speed + 1,
+                                 road.non_changed_speed + road.score // 100 + 3)
 
     if direction == 1:
         speed += road.non_changed_speed
 
     y_position = -random.randrange(110, 330)
-    car = NpcCar(load_image(image), direction, (x_pos, y_position), speed, road,
+    car = NpcCar(load_image(image), direction, (x_pos, y_position), speed,
+                 road,
                  sprites)
 
     sprites.add(car)
