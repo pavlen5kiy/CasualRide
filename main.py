@@ -7,7 +7,7 @@ from utility import *
 from coins_controller import *
 
 tracks = ['CasualRide', 'BigOldBlues', 'OnMyWay']
-skins = ['red', 'yellow', 'pink', 'blue', 'brown' 'green']
+skins = ['red', 'yellow', 'pink', 'blue', 'brown', 'green']
 
 
 def main():

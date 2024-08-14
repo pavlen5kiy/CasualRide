@@ -4,17 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Small changes">
-      <change afterPath="$PROJECT_DIR$/assets/CoinPickup.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/OnMyWay.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/overlay.png" afterDir="false" />
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Menu development started, coin sound added, song &quot;OnMyWay&quot; added">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/GetUpAction.mp3" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/npc_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/set_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/set_functions.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +165,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723647052220</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Menu development started, coin sound added, song &quot;OnMyWay&quot; added">
+      <option name="closed" value="true" />
+      <created>1723659668652</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1723659668652</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -196,6 +196,7 @@
     <MESSAGE value="Difficulty system modified" />
     <MESSAGE value="Smoke particles added, music changed, timer changed" />
     <MESSAGE value="Small changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small changes" />
+    <MESSAGE value="Menu development started, coin sound added, song &quot;OnMyWay&quot; added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Menu development started, coin sound added, song &quot;OnMyWay&quot; added" />
   </component>
 </project>
