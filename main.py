@@ -1,9 +1,12 @@
 import pygame
+import random
 
 from npc_controller import *
 from set_functions import *
 from utility import *
 from coins_controller import *
+
+tracks = ['CasualRide', 'BigOldBlues']
 
 
 def main():
@@ -11,10 +14,10 @@ def main():
     clock = pygame.time.Clock()
 
     screen, size, screen_rect = set_screen((480, 640))
-    set_music('GetUpAction')
+    set_music(random.choice(tracks))
 
     timer = Timer(-1, screen, size)
-    timer.seconds = 9
+    timer.seconds = 4
 
     car_skin = 'blue'
 
@@ -23,6 +26,7 @@ def main():
     npc_cars = pygame.sprite.Group()
     coins = pygame.sprite.Group()
     player = pygame.sprite.Group()
+    npc_particles = pygame.sprite.Group()
 
     road = Road(load_image('road'), sprites)
     car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars, player)
@@ -33,12 +37,9 @@ def main():
     fps = 60
 
     running = True
-    first_launch = True
 
     show_rect = False
     show_hitbox = False
-
-    road_speed = road.speed
 
     (play, lost, start, speed_change, spawn_tick, coin_spawn_tick,
      start_label, lose_label, score_label, score_lost_label) = set_game(screen,
@@ -71,6 +72,8 @@ def main():
                         car.y_movement = -1
 
                 if event.key == pygame.K_r:
+                    set_music(random.choice(tracks))
+
                     sprites = pygame.sprite.Group()
                     npc_cars = pygame.sprite.Group()
                     coins = pygame.sprite.Group()
@@ -82,8 +85,7 @@ def main():
 
                     pygame.display.set_caption('Pause')
 
-                    timer.seconds = 9
-                    road_speed = road.speed
+                    timer.seconds = 3
 
                     (play, lost, start, speed_change, spawn_tick, coin_spawn_tick,
                      start_label, lose_label, score_label,
@@ -126,9 +128,9 @@ def main():
                 pass
                 spawn_npc(npc_cars, road)
 
-            if spawn_tick == 300:
+            if spawn_tick == 60:
                 for npc in npc_cars:
-                    npc.update()
+                    npc.update(npc_particles)
             else:
                 spawn_tick += 1
 
@@ -144,12 +146,15 @@ def main():
         clock.tick(fps)
 
         particles.update(screen_rect)
+        npc_particles.update(screen_rect)
+
         screen.fill(pygame.Color('black'))
         sprites.draw(screen)
         coins.draw(screen)
-        npc_cars.draw(screen)
         particles.draw(screen)
         player.draw(screen)
+        npc_particles.draw(screen)
+        npc_cars.draw(screen)
 
         render_hitbox(screen, car, npc_cars, show_rect, show_hitbox)
 
@@ -163,18 +168,8 @@ def main():
 
         timer.update()
 
-        if first_launch:
-            start_label.update()
-
-            if 0 < timer.seconds <= 4:
-                timer.render()
-
-            if 0 < start_label.seconds:
-                start_label.render()
-
-        else:
-            if 0 < timer.seconds:
-                timer.render()
+        if 0 < timer.seconds:
+            timer.render()
 
         pygame.display.flip()
 

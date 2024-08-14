@@ -27,9 +27,9 @@ class Road(Sprite):
             self.rect.y = -970
             self.score += 1
 
-        self.speed = int((self.default_speed + self.score // 10) - 3 * (
-                    self.score // 50) - 2 * (self.score // 100) + self.speed_change)
-        self.non_changed_speed = self.speed - self.speed_change
+        self.non_changed_speed = int((self.default_speed + self.score // 10) - 3 * (
+                    self.score // 50) - 2 * (self.score // 100))
+        self.speed = self.non_changed_speed + self.speed_change
         self.rect.y += self.speed
         # print(self.speed, self.speed_change)
 
@@ -83,18 +83,18 @@ class Car(Sprite):
             self.image = self.default_image
 
         for npc in self.npc_group:
-            if self.hitbox.colliderect(npc.hitbox):
-                return True
+            # if self.hitbox.colliderect(npc.hitbox):
+            #     return True
             pass
 
         create_particles((self.rect.x + self.rect.width // 2 - 6, self.rect.y + 90),
                          generate_particles('particle'),
-                         1, self.road.speed,
+                         1, self.road.speed, 1,
                          particles_group)
 
 
 class NpcCar(Sprite):
-    def __init__(self, image, direction, position, speed, *group):
+    def __init__(self, image, direction, position, speed, road, *group):
         super().__init__(*group)
         self.image = image
         self.rect = self.image.get_rect()
@@ -105,13 +105,30 @@ class NpcCar(Sprite):
         self.hitbox = pygame.Rect(0, 0, 44, 83)
         self.hitbox.topleft = (self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
         self.speed_change = 0
-        self.alt_speed = 0
+        self.road = road
 
-    def update(self):
+    def update(self, particles_group):
         self.rect.y += self.speed + self.speed_change
         self.hitbox.y += self.speed + self.speed_change
         if self.rect.y > 641 or self.rect.y < -400:
             self.kill()
+
+        if self.direction == -1:
+            direction_modifier = 1
+            particle_speed = abs(self.road.non_changed_speed - self.speed) * 2
+            if self.speed_change > 0:
+                direction_modifier = 2
+            particle_y = self.rect.y + 90
+        else:
+            direction_modifier = 0
+            particle_speed = abs(self.speed // 2)
+            particle_y = self.rect.y
+
+        create_particles(
+            (self.rect.x + self.rect.width // 2 - 6, particle_y),
+            generate_particles('particle'),
+            1, particle_speed, 1 + direction_modifier,
+            particles_group)
 
 
 class Particle(Sprite):
@@ -138,9 +155,9 @@ class Particle(Sprite):
 
 
 # Particles functions
-def create_particles(position, particles, particle_count, speed, *group):
+def create_particles(position, particles, particle_count, speed, direction, *group):
     for _ in range(particle_count):
-        Particle(position, random.randint(0, 20) / 10 - 1, random.randrange(1, 4),
+        Particle(position, random.randint(-10, 10) / 10, direction * random.randrange(1, 4),
                  particles, speed, *group)
 
 

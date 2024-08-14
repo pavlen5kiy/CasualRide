@@ -8,7 +8,8 @@ def set_npc(sprites, road, x_pos):
     images = ['car_blue', 'car_green', 'car_brown', 'car_red', 'car_yellow', 'car_pink']
     directions = [1, -1]
 
-    direction = random.choice(directions)
+    # direction = random.choice(directions)
+    direction = -1
     image = random.choice(images)
 
     if direction == 1:
@@ -22,10 +23,10 @@ def set_npc(sprites, road, x_pos):
         speed = random.randrange(road.non_changed_speed + 1, road.non_changed_speed + road.score // 100 + 3)
 
     if direction == 1:
-        speed += road.speed
+        speed += road.non_changed_speed
 
     y_position = -random.randrange(110, 330)
-    car = NpcCar(load_image(image), direction, (x_pos, y_position), speed,
+    car = NpcCar(load_image(image), direction, (x_pos, y_position), speed, road,
                  sprites)
 
     sprites.add(car)

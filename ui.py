@@ -54,7 +54,7 @@ class Timer(Ui):
             if self.tick > 0:
                 self.tick -= 1
             if self.tick == 0:
-                self.tick = 30
+                self.tick = 60
                 self.seconds -= 1
 
 
