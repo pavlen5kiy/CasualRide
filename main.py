@@ -11,12 +11,12 @@ def main():
     clock = pygame.time.Clock()
 
     screen, size, screen_rect = set_screen((480, 640))
-    # set_music('GetUpAction')
+    set_music('GetUpAction')
 
     timer = Timer(-1, screen, size)
     timer.seconds = 9
 
-    car_skin = 'pink'
+    car_skin = 'blue'
 
     sprites = pygame.sprite.Group()
     particles = pygame.sprite.Group()

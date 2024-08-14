@@ -19,7 +19,7 @@ def set_npc(sprites, road, x_pos):
     if direction == -1:
         speed = random.randrange(1, road.non_changed_speed)
     else:
-        speed = random.randrange(road.non_changed_speed + 1, road.non_changed_speed + 4)
+        speed = random.randrange(road.non_changed_speed + 1, road.non_changed_speed + road.score // 100 + 3)
 
     if direction == 1:
         speed += road.speed
@@ -33,7 +33,17 @@ def set_npc(sprites, road, x_pos):
 
 def spawn_npc(sprites, road):
     for i in range(4):
-        if random.randrange(1, 3 + road.score // 50) == 2:
+        skip = False
+        skip_attempts = 3 - road.score // 50
+        if skip_attempts > 0:
+            for j in range(skip_attempts):
+                if random.randrange(1, 3 + road.score // 50) == 1:
+                    skip = True
+                    break
+        else:
+            if random.randrange(1, 5) == 1:
+                skip = True
+        if skip:
             continue
         else:
             offset = random.randrange(1, 20) * random.choice([1, -1])

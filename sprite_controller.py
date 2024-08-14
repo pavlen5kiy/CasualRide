@@ -40,7 +40,7 @@ class Car(Sprite):
         self.default_image = image
         self.image = image
         self.rect = self.image.get_rect()
-        self.rect.topleft = (360 - 30, 450 - 52)
+        self.rect.topleft = (240 - 30, 450 - 52)
         self.x_movement = 0
         self.x_speed = 5
         self.y_movement = 0
