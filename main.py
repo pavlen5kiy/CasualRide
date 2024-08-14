@@ -128,7 +128,7 @@ def main():
                 pass
                 spawn_npc(npc_cars, road)
 
-            if spawn_tick == 60:
+            if spawn_tick == 300:
                 for npc in npc_cars:
                     npc.update(npc_particles)
             else:

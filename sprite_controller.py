@@ -83,8 +83,8 @@ class Car(Sprite):
             self.image = self.default_image
 
         for npc in self.npc_group:
-            # if self.hitbox.colliderect(npc.hitbox):
-            #     return True
+            if self.hitbox.colliderect(npc.hitbox):
+                return True
             pass
 
         create_particles((self.rect.x + self.rect.width // 2 - 6, self.rect.y + 90),
@@ -121,7 +121,7 @@ class NpcCar(Sprite):
             particle_y = self.rect.y + 90
         else:
             direction_modifier = 0
-            particle_speed = abs(self.speed // 2)
+            particle_speed = abs(self.speed // 4)
             particle_y = self.rect.y
 
         create_particles(
@@ -142,7 +142,7 @@ class Particle(Sprite):
         self.rect.x, self.rect.y = pos
 
         self.tick = 0
-        self.max_tick = random.randrange(1, (speed // 2 + 1) * 10)
+        self.max_tick = random.randrange(1, (speed // 2 + 1) * 5)
 
     def update(self, screen_rect):
         self.rect.x += self.velocity[0]

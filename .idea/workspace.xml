@@ -4,14 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Difficulty system modified">
-      <change afterPath="$PROJECT_DIR$/assets/BigOldBlues.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/CasualRide.mp3" afterDir="false" />
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Smoke particles added, music changed, timer changed">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/particle.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/particle.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/npc_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/npc_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,7 +151,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723628596096</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Smoke particles added, music changed, timer changed">
+      <option name="closed" value="true" />
+      <created>1723646613516</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1723646613516</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -175,6 +181,7 @@
     <MESSAGE value="Speed control changed, difficulty progression changed" />
     <MESSAGE value="Small changes" />
     <MESSAGE value="Difficulty system modified" />
-    <option name="LAST_COMMIT_MESSAGE" value="Difficulty system modified" />
+    <MESSAGE value="Smoke particles added, music changed, timer changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Smoke particles added, music changed, timer changed" />
   </component>
 </project>

@@ -8,8 +8,7 @@ def set_npc(sprites, road, x_pos):
     images = ['car_blue', 'car_green', 'car_brown', 'car_red', 'car_yellow', 'car_pink']
     directions = [1, -1]
 
-    # direction = random.choice(directions)
-    direction = -1
+    direction = random.choice(directions)
     image = random.choice(images)
 
     if direction == 1:
