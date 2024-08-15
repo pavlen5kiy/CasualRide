@@ -5,26 +5,6 @@ import pygame
 from ui import *
 
 
-def load_image(name, color_key=None):
-    fullname = os.path.join("assets/sprites/", name + '.png')
-
-    try:
-        image = pygame.image.load(fullname).convert_alpha()
-    except pygame.error as e:
-        print(f"Err: {e}")
-        raise SystemExit(e)
-
-    if color_key is not None:
-        if color_key == -1:
-            color_key = image.get_at((0, 0))
-        image.set_colorkey(color_key)
-
-    else:
-        image = image.convert_alpha()
-
-    return image
-
-
 def render_hitbox(screen, car, npc_cars, rect=True, hitbox=True):
     if rect:
         pygame.draw.rect(screen, pygame.Color('blue'), car.rect)
@@ -42,6 +22,13 @@ def render_hitbox(screen, car, npc_cars, rect=True, hitbox=True):
 def change_skin(car, skin):
     car.default_image = load_image(f'car_{skin}_up')
     car.image = load_image(f'car_{skin}_up')
+    car.rect = car.image.get_rect()
+    car.rect.topleft = (240 - car.rect.width // 2, 450 - car.rect.height // 2)
+
+
+def change_road(road, skin):
+    road.image = load_image(skin)
+    road.rect = road.image.get_rect()
 
 
 def set_screen(size):

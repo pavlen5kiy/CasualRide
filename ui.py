@@ -1,4 +1,5 @@
 import pygame
+from load_image import load_image
 
 
 class Ui:
@@ -80,5 +81,7 @@ class CoinsCount(Text):
 
     def update(self):
         self.render = self.font.render(str(self.coins_count), True, self.color)
-        self.dest = (self.width - self.render.get_width() - 10, 10)
+        self.dest = (self.width - self.render.get_width() - 60, 17)
+        coin_image = load_image('coin_small')
         self.screen.blit(self.render, self.dest)
+        self.screen.blit(coin_image, (430, 10))

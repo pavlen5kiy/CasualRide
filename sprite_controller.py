@@ -2,7 +2,7 @@ import random
 
 import pygame
 
-from utility import load_image
+from load_image import load_image
 
 
 class Sprite(pygame.sprite.Sprite):
@@ -41,7 +41,7 @@ class Car(Sprite):
         self.default_image = image
         self.image = image
         self.rect = self.image.get_rect()
-        self.rect.topleft = (240 - 30, 450 - 52)
+        self.rect.topleft = (240 - self.rect.width // 2, 450 - self.rect.height // 2)
         self.x_movement = 0
         self.x_speed = 5
         self.y_movement = 0
@@ -200,3 +200,32 @@ class UiSprite(Sprite):
         self.image = image
         self.rect = self.image.get_rect()
         self.rect.topleft = pos
+
+
+class Button(Sprite):
+    def __init__(self, image, highlight, pos=(0, 0), *group):
+        super().__init__(*group)
+        self.image = image
+        self.rect = self.image.get_rect()
+        self.orig = image
+        self.highlight = highlight
+        self.rect.x = pos[0]
+        self.rect.y = pos[1]
+
+    def update(self, *args):
+        mouse_pos = pygame.mouse.get_pos()
+        if self.rect.x <= mouse_pos[
+            0] <= self.rect.x + self.orig.get_width() and self.rect.y <= \
+                mouse_pos[1] <= self.rect.y + self.orig.get_height():
+            self.image = self.highlight
+        else:
+            self.image = self.orig
+
+        if (args and args[0].type == pygame.MOUSEBUTTONDOWN and
+                self.rect.collidepoint(args[0].pos)):
+            sfx = pygame.mixer.Sound('assets/sfx/ButtonClick.mp3')
+            sfx.set_volume(0.5)
+            sfx.play()
+            return True
+
+        return False
