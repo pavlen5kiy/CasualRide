@@ -6,7 +6,7 @@ from set_functions import *
 from utility import *
 from coins_controller import *
 
-tracks = ['CasualRide', 'BigOldBlues', 'OnMyWay']
+tracks = ['CasualRide', 'BigOldBlues', 'OnMyWay', '47WeeksOnTheRoad']
 skins = ['red', 'yellow', 'pink', 'blue', 'brown', 'green']
 
 

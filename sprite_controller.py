@@ -188,7 +188,8 @@ class Coin(Sprite):
         self.rect.y += self.road.speed
         if self.rect.colliderect(self.car.rect):
             self.coins_count.coins_count += 1
-            sfx = pygame.mixer.Sound('assets/CoinPickup.mp3')
+            sfx = pygame.mixer.Sound('assets/sfx/CoinPickup.mp3')
+            sfx.set_volume(0.5)
             sfx.play()
             self.kill()
 

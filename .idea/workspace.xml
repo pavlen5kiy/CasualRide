@@ -4,9 +4,38 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Menu development started, coin sound added, song &quot;OnMyWay&quot; added">
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Small changes">
+      <change afterPath="$PROJECT_DIR$/assets/music/47WeeksOnTheRoad.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/BigOldBlues.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/music/BigOldBlues.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/CasualRide.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/music/CasualRide.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/CoinPickup.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sfx/CoinPickup.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/OnMyWay.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/music/OnMyWay.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/PixelOperator8-Bold.ttf" beforeDir="false" afterPath="$PROJECT_DIR$/assets/fonts/PixelOperator8-Bold.ttf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_blue_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_blue_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_blue_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_blue_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_brown_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_brown_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_brown_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_brown_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_green_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_green_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_green_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_green_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_left.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_left.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_pink_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_pink_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_pink_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_pink_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_red_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_red_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_red_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_red_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_right.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_right.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_yellow_down.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_yellow_down.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/car_yellow_up.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/car_yellow_up.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/coin.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/coin.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/overlay.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/overlay.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/particle.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/particle.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/road.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/road.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/set_functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/set_functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -173,7 +202,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723659668652</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="Small changes">
+      <option name="closed" value="true" />
+      <created>1723660259495</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1723660259495</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -195,8 +232,8 @@
     <MESSAGE value="Speed control changed, difficulty progression changed" />
     <MESSAGE value="Difficulty system modified" />
     <MESSAGE value="Smoke particles added, music changed, timer changed" />
-    <MESSAGE value="Small changes" />
     <MESSAGE value="Menu development started, coin sound added, song &quot;OnMyWay&quot; added" />
-    <option name="LAST_COMMIT_MESSAGE" value="Menu development started, coin sound added, song &quot;OnMyWay&quot; added" />
+    <MESSAGE value="Small changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small changes" />
   </component>
 </project>

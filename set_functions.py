@@ -42,7 +42,7 @@ def set_game(screen, size, road):
 
 def set_music(track):
     # pygame.mixer.music.stop()
-    pygame.mixer.music.load(f'assets/{track}.mp3')
+    pygame.mixer.music.load(f'assets/music/{track}.mp3')
     pygame.mixer.music.set_volume(1)
     pygame.mixer.music.play(-1)
     print(f'Music on: {track}.')

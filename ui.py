@@ -12,7 +12,7 @@ class Text(Ui):
     def __init__(self, screen, screen_size, font_size, message, color,
                  dest=(0, 0)):
         super().__init__(screen, screen_size)
-        self.font = pygame.font.Font('assets/PixelOperator8-Bold.ttf',
+        self.font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf',
                                      font_size)
         self.message = message
         self.dest = dest
@@ -39,7 +39,7 @@ class ScoreLabel(Text):
 class Timer(Ui):
     def __init__(self, seconds, screen, screen_size):
         super().__init__(screen, screen_size)
-        self.font = pygame.font.Font('assets/PixelOperator8-Bold.ttf', 200)
+        self.font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf', 200)
         self.seconds = seconds
         self.tick = 0
 
@@ -61,7 +61,7 @@ class Timer(Ui):
 class Startlabel(Timer):
     def __init__(self, seconds, screen, screen_size):
         super().__init__(seconds, screen, screen_size)
-        self.font = pygame.font.Font('assets/PixelOperator8-Bold.ttf', 60)
+        self.font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf', 60)
 
     def render(self):
         output = self.font.render('Get Up!', True, 'black')
