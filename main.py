@@ -2,24 +2,17 @@ import pygame
 import random
 
 from npc_controller import *
-from set_functions import *
 from utility import *
 from coins_controller import *
 
 tracks = ['CasualRide', 'BigOldBlues', 'OnMyWay', '47WeeksOnTheRoad']
 skins = ['red', 'yellow', 'pink', 'blue', 'brown', 'green']
+car_skin = skins[0]
 
 
-def main():
-    pygame.init()
-    clock = pygame.time.Clock()
-
-    screen, size, screen_rect = set_screen((480, 640))
-
+def play():
     timer = Timer(-1, screen, size)
     timer.seconds = 4
-
-    car_skin = random.choice(skins)
 
     sprites = pygame.sprite.Group()
     particles = pygame.sprite.Group()
@@ -28,7 +21,6 @@ def main():
     player = pygame.sprite.Group()
     npc_particles = pygame.sprite.Group()
     overlay_group = pygame.sprite.Group()
-    main_menu_sprites = pygame.sprite.Group()
 
     road = Road(load_image('road'), sprites)
     car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars, player)
@@ -36,41 +28,32 @@ def main():
 
     overlay = UiSprite(load_image('overlay'), (0, 0), overlay_group)
 
-    pause_label = Text(screen, size, 50, 'Pause', 'white')
-    pause_label.dest = ((size[0] - pause_label.render.get_width()) // 2, 10)
-
-    menu_label = Text(screen, size, 50, 'Menu', 'white')
-    menu_label.dest = ((size[0] - menu_label.render.get_width()) // 2, 10)
-
-    pygame.display.set_caption('Car Game')
-
-    fps = 60
-
-    running = True
+    set_music(random.choice(tracks))
 
     show_rect = False
     show_hitbox = False
 
-    timer_start = False
+    lost = False
 
-    (play, lost, start, speed_change, spawn_tick, coin_spawn_tick,
-     start_label, lose_label, score_label, score_lost_label) = set_game(screen,
-                                                                        size,
-                                                                        road)
+    spawn_tick = 0
+    coin_spawn_tick = 0
 
-    while running:
+    lose_label = Text(screen, size, 50, 'You lost!', 'white')
+    lose_label.dest = ((size[0] - lose_label.render.get_width()) // 2, 100)
+
+    score_lost_label = ScoreLabel(screen, size, 30, 'Score: ', road, 'white')
+    score_lost_label.dest = (
+        (size[0] // 2 - score_lost_label.render.get_width() // 2) - 20, 150)
+
+    score_label = ScoreLabel(screen, size, 40, '', road, 'white', (10, 10))
+
+    while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                running = False
+                pygame.quit()
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
-                    if not timer_start:
-                        timer_start = True
-                        set_music(random.choice(tracks))
-
-                    if start:
-                        if not lost:
-                            play = not play
+                    pass
                 if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                     if car.rect.x >= 0:
                         car.x_movement = -1
@@ -84,46 +67,8 @@ def main():
                 if event.key == pygame.K_w or event.key == pygame.K_UP:
                     if car.rect.y >= 0:
                         car.y_movement = -1
-                if event.key == pygame.K_ESCAPE and not play and timer_start and timer.seconds <= 0:
-                    sprites = pygame.sprite.Group()
-                    npc_cars = pygame.sprite.Group()
-                    coins = pygame.sprite.Group()
-                    player = pygame.sprite.Group()
-
-                    road = Road(load_image('road'), sprites)
-                    car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars,
-                              player)
-
-                    timer.seconds = 3
-
-                    (play, lost, start, speed_change, spawn_tick,
-                     coin_spawn_tick,
-                     start_label, lose_label, score_label,
-                     score_lost_label) = set_game(screen,
-                                                  size,
-                                                  road)
-                    timer_start = False
-
-                if event.key == pygame.K_r:
-                    set_music(random.choice(tracks))
-
-                    sprites = pygame.sprite.Group()
-                    npc_cars = pygame.sprite.Group()
-                    coins = pygame.sprite.Group()
-                    player = pygame.sprite.Group()
-
-                    road = Road(load_image('road'), sprites)
-                    car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars,
-                              player)
-
-                    timer.seconds = 3
-
-                    (play, lost, start, speed_change, spawn_tick,
-                     coin_spawn_tick,
-                     start_label, lose_label, score_label,
-                     score_lost_label) = set_game(screen,
-                                                  size,
-                                                  road)
+                if event.key == pygame.K_ESCAPE:
+                    main_menu()
 
                 if event.key == pygame.K_F1:
                     show_rect = not show_rect
@@ -140,17 +85,10 @@ def main():
                 if event.key == pygame.K_w or event.key == pygame.K_UP:
                     car.y_movement = 0
 
-        if timer.seconds == 0 and timer_start:
-            if not start:
-                start = True
-                play = True
-
-        if play:
-
+        if timer.seconds <= 0:
             road.update()
 
             if car.update(particles):
-                play = False
                 lost = True
 
             if not npc_cars:
@@ -175,22 +113,14 @@ def main():
         particles.update(screen_rect)
         npc_particles.update(screen_rect)
 
-        clock.tick(fps)
-
         screen.fill(pygame.Color('black'))
+
         sprites.draw(screen)
         coins.draw(screen)
         particles.draw(screen)
         player.draw(screen)
         npc_particles.draw(screen)
         npc_cars.draw(screen)
-
-        if not play:
-            overlay_group.draw(screen)
-            if timer_start and timer.seconds <= 0 and not lost:
-                pause_label.update()
-            if not timer_start:
-                menu_label.update()
 
         render_hitbox(screen, car, npc_cars, show_rect, show_hitbox)
 
@@ -202,16 +132,80 @@ def main():
 
         coins_count.update()
 
-        if timer_start:
+        if 0 < timer.seconds:
+            overlay_group.draw(screen)
+            timer.render()
             timer.update()
 
-            if 0 < timer.seconds:
-                timer.render()
+        clock.tick(fps)
+        pygame.display.update()
 
-        pygame.display.flip()
 
-    pygame.quit()
+def main_menu():
+
+    global car_skin
+
+    set_music('47WeeksOnTheRoad')
+
+    main_menu_sprites = pygame.sprite.Group()
+    sprites = pygame.sprite.Group()
+    npc_cars = pygame.sprite.Group()
+    player = pygame.sprite.Group()
+    overlay_group = pygame.sprite.Group()
+
+    menu_label = Text(screen, size, 50, 'Menu', 'white')
+    menu_label.dest = ((size[0] - menu_label.render.get_width()) // 2, 10)
+    road = Road(load_image('road'), sprites)
+    car = Car(load_image(f'car_{car_skin}_up'), road, npc_cars, player)
+    overlay = UiSprite(load_image('overlay'), (0, 0), overlay_group)
+
+    while True:
+        for event in pygame.event.get():
+            if event.type == pygame.QUIT:
+                pygame.quit()
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_SPACE:
+                    play()
+
+                if event.key == pygame.K_1:
+                    car_skin = skins[0]
+                    change_skin(car, car_skin)
+                if event.key == pygame.K_2:
+                    car_skin = skins[1]
+                    change_skin(car, car_skin)
+                if event.key == pygame.K_3:
+                    car_skin = skins[2]
+                    change_skin(car, car_skin)
+                if event.key == pygame.K_4:
+                    car_skin = skins[3]
+                    change_skin(car, car_skin)
+                if event.key == pygame.K_5:
+                    car_skin = skins[4]
+                    change_skin(car, car_skin)
+                if event.key == pygame.K_6:
+                    car_skin = skins[5]
+                    change_skin(car, car_skin)
+
+        screen.fill(pygame.Color('black'))
+
+        sprites.draw(screen)
+        overlay_group.draw(screen)
+        player.draw(screen)
+        main_menu_sprites.draw(screen)
+
+        road.update()
+        menu_label.update()
+
+        clock.tick(fps)
+        pygame.display.update()
 
 
 if __name__ == '__main__':
-    main()
+    pygame.init()
+    clock = pygame.time.Clock()
+    fps = 60
+    screen, size, screen_rect = set_screen((480, 640))
+
+    main_menu()
+
+    pygame.quit()

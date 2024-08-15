@@ -2,6 +2,8 @@ import os
 
 import pygame
 
+from ui import *
+
 
 def load_image(name, color_key=None):
     fullname = os.path.join("assets/sprites/", name + '.png')
@@ -40,3 +42,22 @@ def render_hitbox(screen, car, npc_cars, rect=True, hitbox=True):
 def change_skin(car, skin):
     car.default_image = load_image(f'car_{skin}_up')
     car.image = load_image(f'car_{skin}_up')
+
+
+def set_screen(size):
+    pygame.display.set_caption('Car Game')
+
+    size = size
+    screen = pygame.display.set_mode(size)
+    screen_rect = (0, 0, size[0], size[1])
+
+    return screen, size, screen_rect
+
+
+def set_music(track):
+    # pygame.mixer.music.stop()
+    pygame.mixer.music.load(f'assets/music/{track}.mp3')
+    pygame.mixer.music.set_volume(1)
+    pygame.mixer.music.play(-1)
+    print(f'Music on: {track}.')
+
