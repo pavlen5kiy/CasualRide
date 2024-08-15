@@ -1,5 +1,7 @@
 import pygame
 import random
+import json
+import sys
 
 from npc_controller import *
 from utility import *
@@ -10,8 +12,41 @@ music = ['CasualRide', 'HighwayToTheWest', 'OnMyWay', '47WeeksOnTheRoad',
          'WeHaveNotGottenReallyFar']
 skins = ['red', 'yellow', 'pink', 'blue', 'brown', 'green']
 road_skins = ['road_basic', 'road_winter', 'road_desert']
-car_skin = 0
-road_skin = 0
+
+saving = {
+    'coins': 0,
+    'high_score': 0,
+    'car_skin': 0,
+    'road_skin': 0
+}
+settings_file = {
+    'music_volume': 1,
+    'sfx_volume': 0.5,
+    'song': 0
+}
+
+
+def close(*args):
+
+    global settings_file
+    global saving
+
+    song, coins, car_skin, road_skin = args
+
+    settings_file['song'] = song
+    saving['coins'] = coins
+    saving['car_skin'] = car_skin
+    saving['road_skin'] = road_skin
+
+    with open('saving.json', 'w') as f:
+        json.dump(saving, f)
+        print('All scores successfully saved.')
+    with open('settings_file.json', 'w') as f:
+        json.dump(settings_file, f)
+        print('All settings successfully saved.')
+
+    pygame.quit()
+    sys.exit()
 
 
 def play():
@@ -39,6 +74,7 @@ def play():
     show_hitbox = False
 
     lost = False
+    updated = False
 
     spawn_tick = 0
     coin_spawn_tick = 0
@@ -46,7 +82,7 @@ def play():
     lose_label = Text(screen, size, 50, 'You lost!', 'white')
     lose_label.dest = ((size[0] - lose_label.render.get_width()) // 2, 100)
 
-    score_lost_label = ScoreLabel(screen, size, 30, 'Score: ', road, 'white')
+    score_lost_label = ScoreLabel(screen, size, 20, '', road, 'white')
     score_lost_label.dest = (
         (size[0] // 2 - score_lost_label.render.get_width() // 2) - 20, 150)
 
@@ -55,7 +91,7 @@ def play():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                close(current_song, coins_count.coins_count, car_skin, road_skin)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_SPACE:
                     pass
@@ -132,6 +168,20 @@ def play():
         screen.blit(load_image('line'), (-10, 0))
 
         if lost:
+            if not updated:
+                if road.score <= saving['high_score']:
+                    sll_msg = 'Score: '
+                else:
+                    sll_msg = 'New high score: '
+                    saving['high_score'] = road.score
+                updated = True
+
+                score_lost_label.message = sll_msg
+                score_lost_label.render = score_lost_label.font.render(score_lost_label.message, True, score_lost_label.color)
+                score_lost_label.dest = (
+                    (size[0] // 2 - score_lost_label.render.get_width() // 2) - 20,
+                    150)
+
             overlay_group.draw(screen)
             lose_label.update()
             score_lost_label.update()
@@ -186,7 +236,7 @@ def main_menu():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                close(current_song, coins_count.coins_count, car_skin, road_skin)
             if play_button.update(event):
                 play()
             if arrow_left.update(event):
@@ -260,13 +310,14 @@ def settings():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                close(current_song, coins_count.coins_count, car_skin, road_skin)
             if arrow_left.update(event):
                 if current_song - 1 < 0:
                     current_song = len(music) - 1
                 else:
                     current_song -= 1
                 song_name = change_song(screen, size, music, current_song)
+                settings_file['song'] = current_song
 
             if arrow_right.update(event):
                 if current_song + 1 > len(music) - 1:
@@ -274,6 +325,7 @@ def settings():
                 else:
                     current_song += 1
                 song_name = change_song(screen, size, music, current_song)
+                settings_file['song'] = current_song
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
@@ -323,7 +375,7 @@ def road_menu():
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
-                pygame.quit()
+                close(current_song, coins_count.coins_count, car_skin, road_skin)
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     main_menu()
@@ -361,10 +413,26 @@ if __name__ == '__main__':
     clock = pygame.time.Clock()
     fps = 60
     screen, size, screen_rect = set_screen((480, 640))
+
+    try:
+        with open('saving.json') as f:
+            saving = json.load(f)
+    except:
+        print('No saving file created yet')
+    try:
+        with open('settings_file.json') as f:
+            settings_file = json.load(f)
+    except:
+        print('No settings file created yet')
+
+    car_skin = saving['car_skin']
+    road_skin = saving['road_skin']
+
     coins_count = CoinsCount(screen, size, 40, '#f7e26b')
-    current_song = 3
+    coins_count.coins_count = saving['coins']
+    current_song = settings_file['song']
+
     set_music(music[current_song])
 
     main_menu()
-
-    pygame.quit()
+    close(current_song, coins_count.coins_count, car_skin, road_skin)

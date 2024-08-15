@@ -4,13 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Main menu, road menu, settings menu made">
-      <change afterPath="$PROJECT_DIR$/assets/music/WeHaveNotGottenReallyFar.mp3" afterDir="false" />
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Song pick in settings added, 'WeHaveNotGottenVeryFar' song added, new class HiddenText added (shows hint when hover mouse over the text)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/music/BigOldBlues.mp3" beforeDir="false" afterPath="$PROJECT_DIR$/assets/music/HighwayToTheWest.mp3" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/arrow.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/arrow.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/arrow_hl.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/arrow_hl.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/play.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/play.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/play_hl.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/play_hl.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/road.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/road.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/road_hl.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/road_hl.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/settings.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/settings.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/buttons/settings_hl.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/buttons/settings_hl.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,9 +58,9 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets/music" />
       <recent name="$PROJECT_DIR$/assets/sprites" />
-      <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets/sfx" />
       <recent name="$PROJECT_DIR$/assets/buttons" />
     </key>
@@ -213,7 +217,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723731262178</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Song pick in settings added, 'WeHaveNotGottenVeryFar' song added, new class HiddenText added (shows hint when hover mouse over the text)">
+      <option name="closed" value="true" />
+      <created>1723738678923</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1723738678923</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -240,6 +252,7 @@
     <MESSAGE value="Small changes, song '47WeeksOnTheRoad' added, assets storage structure rearranged" />
     <MESSAGE value="Started working on menus" />
     <MESSAGE value="Main menu, road menu, settings menu made" />
-    <option name="LAST_COMMIT_MESSAGE" value="Main menu, road menu, settings menu made" />
+    <MESSAGE value="Song pick in settings added, 'WeHaveNotGottenVeryFar' song added, new class HiddenText added (shows hint when hover mouse over the text)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Song pick in settings added, 'WeHaveNotGottenVeryFar' song added, new class HiddenText added (shows hint when hover mouse over the text)" />
   </component>
 </project>
