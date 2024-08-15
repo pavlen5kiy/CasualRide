@@ -40,7 +40,8 @@ class ScoreLabel(Text):
 class Timer(Ui):
     def __init__(self, seconds, screen, screen_size):
         super().__init__(screen, screen_size)
-        self.font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf', 200)
+        self.font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf',
+                                     200)
         self.seconds = seconds
         self.tick = 0
 
@@ -62,7 +63,8 @@ class Timer(Ui):
 class Startlabel(Timer):
     def __init__(self, seconds, screen, screen_size):
         super().__init__(seconds, screen, screen_size)
-        self.font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf', 60)
+        self.font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf',
+                                     60)
 
     def render(self):
         output = self.font.render('Get Up!', True, 'black')
@@ -85,3 +87,24 @@ class CoinsCount(Text):
         coin_image = load_image('coin_small')
         self.screen.blit(self.render, self.dest)
         self.screen.blit(coin_image, (430, 10))
+
+
+class HiddenText(Text):
+    def __init__(self, screen, screen_size, font_size, message,
+                 color,
+                 dest=(0, 0)):
+        super().__init__(screen, screen_size, font_size, message, color,
+                         dest)
+        self.hidden_msg_font = pygame.font.Font('assets/fonts/PixelOperator8-Bold.ttf',
+                                     15)
+
+    def update(self, hidden_message=''):
+        self.screen.blit(self.render, self.dest)
+        if pygame.Rect(*self.dest, self.render.get_width(), self.render.get_height()).collidepoint(pygame.mouse.get_pos()):
+            hidden_msg_render = self.hidden_msg_font.render(hidden_message, True,
+                                                 self.color)
+            pygame.draw.rect(self.screen, pygame.Color('black'),
+                             pygame.Rect(pygame.mouse.get_pos()[0] + 14 - 70, pygame.mouse.get_pos()[1] + 14,
+                                         hidden_msg_render.get_width() + 8,
+                                         hidden_msg_render.get_height() + 8))
+            self.screen.blit(hidden_msg_render, (pygame.mouse.get_pos()[0] + 14 + 4 - 70 , pygame.mouse.get_pos()[1] + 14 + 4))

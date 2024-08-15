@@ -48,3 +48,11 @@ def set_music(track):
     pygame.mixer.music.play(-1)
     print(f'Music on: {track}.')
 
+
+def change_song(screen, size, music, current_song):
+    current_song_name = music[current_song]
+    rendering_song_name = current_song_name if len(current_song_name) <= 10 else current_song_name[0:6] + '...'
+    song_name_label = HiddenText(screen, size, 30, rendering_song_name,'white')
+    song_name_label.dest = ((size[0] - song_name_label.render.get_width()) // 2, 100 + 30 - song_name_label.render.get_height() // 2)
+    set_music(music[current_song])
+    return song_name_label

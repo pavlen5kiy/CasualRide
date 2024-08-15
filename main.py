@@ -6,7 +6,8 @@ from utility import *
 from coins_controller import *
 from load_image import load_image
 
-music = ['CasualRide', 'BigOldBlues', 'OnMyWay', '47WeeksOnTheRoad']
+music = ['CasualRide', 'HighwayToTheWest', 'OnMyWay', '47WeeksOnTheRoad',
+         'WeHaveNotGottenReallyFar']
 skins = ['red', 'yellow', 'pink', 'blue', 'brown', 'green']
 road_skins = ['road_basic', 'road_winter', 'road_desert']
 car_skin = 0
@@ -176,11 +177,11 @@ def main_menu():
         pygame.transform.flip(load_image('buttons/arrow_hl'), True, False),
         (140 - 36, 420), menu_sprites)
     settings_button = Button(load_image('buttons/settings'),
-                         load_image('buttons/settings_hl'), (60, 560),
-                         menu_sprites)
+                             load_image('buttons/settings_hl'), (60, 560),
+                             menu_sprites)
     road_button = Button(load_image('buttons/road'),
-                      load_image('buttons/road_hl'), (480 - 60 - 64, 560),
-                      menu_sprites)
+                         load_image('buttons/road_hl'), (480 - 60 - 64, 560),
+                         menu_sprites)
 
     while True:
         for event in pygame.event.get():
@@ -190,7 +191,7 @@ def main_menu():
                 play()
             if arrow_left.update(event):
                 if car_skin - 1 < 0:
-                    car_skin = 5
+                    car_skin = len(skins) - 1
                 else:
                     car_skin -= 1
                 change_skin(car, skins[car_skin])
@@ -225,6 +226,7 @@ def main_menu():
 def settings():
     global car_skin
     global road_skin
+    global current_song
 
     menu_sprites = pygame.sprite.Group()
     sprites = pygame.sprite.Group()
@@ -236,13 +238,43 @@ def settings():
     label.dest = ((size[0] - label.render.get_width()) // 2, 10)
     road = Road(load_image(road_skins[road_skin]), sprites)
 
+    current_song_name = music[current_song]
+    rendering_song_name = current_song_name if len(current_song_name) <= 10 else current_song_name[0:6] + '...'
+    song_name = HiddenText(screen, size, 30, rendering_song_name, 'white')
+    song_name.dest = ((size[0] - song_name.render.get_width()) // 2, 100 + 30 - song_name.render.get_height() // 2)
+
     car = Car(load_image(f'car_{skins[car_skin]}_up'), road, npc_cars, player)
     overlay = UiSprite(load_image('overlay'), (0, 0), overlay_group)
+
+    song_section = Text(screen, size, 20, 'Song', 'white')
+    song_section.dest = ((size[0] - song_section.render.get_width()) // 2, 80)
+
+    arrow_right = Button(load_image('buttons/arrow'),
+                         load_image('buttons/arrow_hl'), (430 - 36, 100),
+                         menu_sprites)
+    arrow_left = Button(
+        pygame.transform.flip(load_image('buttons/arrow'), True, False),
+        pygame.transform.flip(load_image('buttons/arrow_hl'), True, False),
+        (50, 100), menu_sprites)
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
+            if arrow_left.update(event):
+                if current_song - 1 < 0:
+                    current_song = len(music) - 1
+                else:
+                    current_song -= 1
+                song_name = change_song(screen, size, music, current_song)
+
+            if arrow_right.update(event):
+                if current_song + 1 > len(music) - 1:
+                    current_song = 0
+                else:
+                    current_song += 1
+                song_name = change_song(screen, size, music, current_song)
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     main_menu()
@@ -259,6 +291,8 @@ def settings():
         screen.blit(load_image('line'), (-10, 0))
 
         label.update()
+        song_section.update()
+        song_name.update(hidden_message=music[current_song])
 
         clock.tick(fps)
         pygame.display.update()
@@ -295,18 +329,16 @@ def road_menu():
                     main_menu()
             if arrow_left.update(event):
                 if road_skin - 1 < 0:
-                    road_skin = 1
-                    change_road(road, road_skins[road_skin])
+                    road_skin = len(road_skins) - 1
                 else:
                     road_skin -= 1
-                    change_road(road, road_skins[road_skin])
+                change_road(road, road_skins[road_skin])
             if arrow_right.update(event):
                 if road_skin + 1 > len(road_skins) - 1:
                     road_skin = 0
-                    change_road(road, road_skins[road_skin])
                 else:
                     road_skin += 1
-                    change_road(road, road_skins[road_skin])
+                change_road(road, road_skins[road_skin])
 
         screen.fill(pygame.Color('black'))
 
@@ -330,7 +362,8 @@ if __name__ == '__main__':
     fps = 60
     screen, size, screen_rect = set_screen((480, 640))
     coins_count = CoinsCount(screen, size, 40, '#f7e26b')
-    set_music(music[-1])
+    current_song = 3
+    set_music(music[current_song])
 
     main_menu()
 
