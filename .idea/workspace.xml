@@ -4,7 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Small changes">
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Road skin shop added">
+      <change afterPath="$PROJECT_DIR$/assets/sprites/road_city.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sprites/road_ocean.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sprites/road_racetrack.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -63,11 +66,11 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/sprites" />
       <recent name="$PROJECT_DIR$/assets/sfx" />
       <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/assets/music" />
-      <recent name="$PROJECT_DIR$/assets/sprites" />
     </key>
   </component>
   <component name="RunManager">
@@ -262,7 +265,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723806756099</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Road skin shop added">
+      <option name="closed" value="true" />
+      <created>1723816458171</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1723816458171</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -293,6 +304,7 @@
     <MESSAGE value="requirements.txt added" />
     <MESSAGE value="More menus added, car skins store added, music settings modified, button sound changed (same sound but equalized)" />
     <MESSAGE value="Small changes" />
-    <option name="LAST_COMMIT_MESSAGE" value="Small changes" />
+    <MESSAGE value="Road skin shop added" />
+    <option name="LAST_COMMIT_MESSAGE" value="Road skin shop added" />
   </component>
 </project>

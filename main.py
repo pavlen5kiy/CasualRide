@@ -11,14 +11,17 @@ from load_image import load_image
 music = ['CasualRide', 'HighwayToTheWest', 'OnMyWay', '47WeeksOnTheRoad',
          'WeHaveNotGottenReallyFar', 'Off']
 skins = {'red': ['open', 0],
-         'yellow': ['locked', 100],
-         'pink': ['locked', 500],
-         'blue': ['locked', 50],
-         'brown': ['locked', 20],
-         'green': ['locked', 250]}
+         'yellow': ['locked', 500],
+         'pink': ['locked', 1000],
+         'blue': ['locked', 300],
+         'brown': ['locked', 100],
+         'green': ['locked', 750]}
 road_skins = {'road_basic': ['open', 0],
-              'road_winter': ['locked', 1500],
-              'road_desert': ['locked', 1000]}
+              'road_winter': ['locked', 2000],
+              'road_desert': ['locked', 750],
+              'road_city': ['locked', 1000],
+              'road_racetrack': ['locked', 1500],
+              'road_ocean': ['locked', 3000]}
 
 saving = {
     'coins': 0,
@@ -305,6 +308,8 @@ def main_menu():
     skin_info = Text(screen, size, 20, skin_info_msg, 'white')
     skin_info.dest = ((size[0] - skin_info.render.get_width()) // 2, 350)
 
+    score_label = Text(screen, size, 30, f'High score: {saving["high_score"]}', 'white', (10, 80))
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -364,6 +369,8 @@ def main_menu():
         if skins[list(skins.keys())[car_skin]][0] == 'locked':
             skin_info.update()
             lock_button_group.draw(screen)
+
+        score_label.update()
 
         road.update()
         screen.blit(load_image('line'), (-10, 0))
