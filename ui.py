@@ -23,6 +23,10 @@ class Text(Ui):
     def update(self):
         self.screen.blit(self.render, self.dest)
 
+    def set_text(self, message):
+        self.message = message
+        self.render = self.font.render(self.message, True, self.color)
+
 
 class ScoreLabel(Text):
     def __init__(self, screen, screen_size, font_size, message, road, color,

@@ -223,8 +223,8 @@ class Button(Sprite):
 
         if (args and args[0].type == pygame.MOUSEBUTTONDOWN and
                 self.rect.collidepoint(args[0].pos)):
-            sfx = pygame.mixer.Sound('assets/sfx/ButtonClick.mp3')
-            sfx.set_volume(0.5)
+            sfx = pygame.mixer.Sound('assets/sfx/ButtonClick2.wav')
+            sfx.set_volume(0.7)
             sfx.play()
             return True
 
