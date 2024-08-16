@@ -62,6 +62,10 @@ class Timer(Ui):
             if self.tick == 0:
                 self.tick = 60
                 self.seconds -= 1
+            # if self.tick == 60 and self.seconds == 0:
+            #     sfx = pygame.mixer.Sound('assets/sfx/Horn.mp3')
+            #     sfx.set_volume(0.5)
+            #     sfx.play()
 
 
 class Startlabel(Timer):

@@ -4,21 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="requirements.txt added">
-      <change afterPath="$PROJECT_DIR$/assets/sfx/ButtonClick2.mp3" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/back.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/back_hl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/continue.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/continue_hl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/home.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/home_hl.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/lock.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/lock_hl.png" afterDir="false" />
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="More menus added, car skins store added, music settings modified, button sound changed (same sound but equalized)">
+      <change afterPath="$PROJECT_DIR$/assets/sfx/Countdown.mp3" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sfx/Horn.mp3" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +54,11 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/sfx" />
       <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/assets/music" />
       <recent name="$PROJECT_DIR$/assets/sprites" />
-      <recent name="$PROJECT_DIR$/assets/sfx" />
     </key>
   </component>
   <component name="RunManager">
@@ -246,7 +237,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723744684967</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="More menus added, car skins store added, music settings modified, button sound changed (same sound but equalized)">
+      <option name="closed" value="true" />
+      <created>1723805085842</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1723805085842</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -276,6 +275,7 @@
     <MESSAGE value="Song pick in settings added, 'WeHaveNotGottenVeryFar' song added, new class HiddenText added (shows hint when hover mouse over the text)" />
     <MESSAGE value="Saving system added, buttons colors changed" />
     <MESSAGE value="requirements.txt added" />
-    <option name="LAST_COMMIT_MESSAGE" value="requirements.txt added" />
+    <MESSAGE value="More menus added, car skins store added, music settings modified, button sound changed (same sound but equalized)" />
+    <option name="LAST_COMMIT_MESSAGE" value="More menus added, car skins store added, music settings modified, button sound changed (same sound but equalized)" />
   </component>
 </project>

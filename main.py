@@ -112,6 +112,10 @@ def play():
     warning = Text(screen, size, 15, "Score won't be saved if you leave!", 'white')
     warning.dest = ((size[0] - warning.render.get_width()) // 2, 530)
 
+    timer_sfx = pygame.mixer.Sound('assets/sfx/Countdown.mp3')
+    timer_sfx.set_volume(1)
+    timer_sfx.play()
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
