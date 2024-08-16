@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="More road skins added, car prices changed">
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Coins spawn system modified">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coins_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/coins_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -278,7 +278,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723820492101</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Coins spawn system modified">
+      <option name="closed" value="true" />
+      <created>1723822022684</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1723822022684</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -311,6 +319,7 @@
     <MESSAGE value="Small changes" />
     <MESSAGE value="Road skin shop added" />
     <MESSAGE value="More road skins added, car prices changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="More road skins added, car prices changed" />
+    <MESSAGE value="Coins spawn system modified" />
+    <option name="LAST_COMMIT_MESSAGE" value="Coins spawn system modified" />
   </component>
 </project>

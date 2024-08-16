@@ -18,10 +18,10 @@ skins = {'red': ['open', 0],
          'green': ['locked', 750]}
 road_skins = {'road_basic': ['open', 0],
               'road_winter': ['locked', 2000],
-              'road_desert': ['locked', 750],
-              'road_city': ['locked', 1000],
-              'road_racetrack': ['locked', 1500],
-              'road_ocean': ['locked', 3000]}
+              'road_desert': ['locked', 1000],
+              'road_city': ['locked', 750],
+              'road_racetrack': ['locked', 3000],
+              'road_ocean': ['locked', 1500]}
 
 saving = {
     'coins': 0,
