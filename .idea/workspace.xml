@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Coins spawn system modified">
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Prices changed">
+      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/restart.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/restart_hl.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
@@ -23,18 +25,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
-  "lastFilter": {
-    "state": "OPEN",
-    "assignee": "pavlen5kiy"
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;pavlen5kiy&quot;
   }
-}]]></component>
-  <component name="GithubPullRequestsUISettings"><![CDATA[{
-  "selectedUrlAndAccountId": {
-    "url": "https://github.com/pavlen5kiy/CarGame",
-    "accountId": "6e007ac3-d18a-4954-8975-c0b90cc279b3"
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/pavlen5kiy/CarGame&quot;,
+    &quot;accountId&quot;: &quot;6e007ac3-d18a-4954-8975-c0b90cc279b3&quot;
   }
-}]]></component>
+}</component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 3
 }</component>
@@ -63,9 +65,9 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets/sprites" />
       <recent name="$PROJECT_DIR$/assets/sfx" />
-      <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/assets/music" />
     </key>
@@ -286,7 +288,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723822022684</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Prices changed">
+      <option name="closed" value="true" />
+      <created>1723822536482</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1723822536482</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -320,6 +330,7 @@
     <MESSAGE value="Road skin shop added" />
     <MESSAGE value="More road skins added, car prices changed" />
     <MESSAGE value="Coins spawn system modified" />
-    <option name="LAST_COMMIT_MESSAGE" value="Coins spawn system modified" />
+    <MESSAGE value="Prices changed" />
+    <option name="LAST_COMMIT_MESSAGE" value="Prices changed" />
   </component>
 </project>

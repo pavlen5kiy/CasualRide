@@ -34,8 +34,24 @@ saving = {
 settings_file = {
     'music_volume': 1,
     'sfx_volume': 0.5,
-    'song': 0
+    'song': 0,
+    'render_hints': 0
 }
+
+
+def render_hint(hint, rect, hints_on=0):
+    if rect.collidepoint(pygame.mouse.get_pos()) and hints_on:
+        hint_font = pygame.font.Font(
+            'assets/fonts/PixelOperator8-Bold.ttf',
+            15)
+        hint_render = hint_font.render(hint, True, pygame.Color('white'))
+        pygame.draw.rect(screen, pygame.Color('black'),
+                         pygame.Rect(pygame.mouse.get_pos()[0] + 14 - 70,
+                                     pygame.mouse.get_pos()[1] + 14,
+                                     hint_render.get_width() + 8,
+                                     hint_render.get_height() + 8))
+        screen.blit(hint_render, (pygame.mouse.get_pos()[0] + 14 + 4 - 70,
+                                  pygame.mouse.get_pos()[1] + 14 + 4))
 
 
 def close(*args):
@@ -70,6 +86,7 @@ def play():
     timer.seconds = 4
 
     pause_menu_sprites = pygame.sprite.Group()
+    restart_button_group = pygame.sprite.Group()
     home_button_group = pygame.sprite.Group()
     sprites = pygame.sprite.Group()
     particles = pygame.sprite.Group()
@@ -117,6 +134,10 @@ def play():
                              load_image('buttons/continue_hl'), (396, 560),
                              pause_menu_sprites)
 
+    restart_button = Button(load_image('buttons/restart'),
+                             load_image('buttons/restart_hl'), (396, 560),
+                             restart_button_group)
+
     warning = Text(screen, size, 15, "Score won't be saved if you leave!",
                    'white')
     warning.dest = ((size[0] - warning.render.get_width()) // 2, 530)
@@ -141,10 +162,14 @@ def play():
             if lost:
                 if home_button.update(event):
                     main_menu()
+                if restart_button.update(event):
+                    play()
 
             if event.type == pygame.KEYDOWN:
-                if event.key == pygame.K_SPACE:
-                    pass
+                if lost:
+                    if event.key == pygame.K_r:
+                        play()
+
                 if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                     if car.rect.x >= 0:
                         car.x_movement = -1
@@ -163,6 +188,10 @@ def play():
                         paused = not paused
                     elif lost:
                         main_menu()
+                if event.key == pygame.K_F3:
+                    settings_file['render_hints'] = int(
+                        not bool(settings_file['render_hints']))
+                    print(settings_file['render_hints'])
 
                 if event.key == pygame.K_F1:
                     show_rect = not show_rect
@@ -236,11 +265,15 @@ def play():
                     (size[
                          0] // 2 - score_lost_label.render.get_width() // 2) - 20,
                     150)
-
             overlay_group.draw(screen)
             lose_label.update()
             score_lost_label.update()
             home_button_group.draw(screen)
+            restart_button_group.draw(screen)
+            render_hint('[Esc]', home_button.rect,
+                        settings_file['render_hints'])
+            render_hint('[R]', restart_button.rect,
+                        settings_file['render_hints'])
 
         else:
             score_label.update()
@@ -258,6 +291,8 @@ def play():
             pause_menu_sprites.draw(screen)
             home_button_group.draw(screen)
             warning.update()
+            render_hint('[Esc]', continue_button.rect,
+                        settings_file['render_hints'])
 
         clock.tick(fps)
         pygame.display.update()
@@ -308,17 +343,20 @@ def main_menu():
     skin_info = Text(screen, size, 20, skin_info_msg, 'white')
     skin_info.dest = ((size[0] - skin_info.render.get_width()) // 2, 350)
 
-    score_label = Text(screen, size, 30, f'High score: {saving["high_score"]}', 'white', (10, 80))
+    score_label = Text(screen, size, 30, f'High score: {saving["high_score"]}',
+                       'white', (10, 80))
 
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 close(current_song, coins_count.coins_count, main_skin,
                       main_road_skin, skins, road_skins)
-            if play_button.update(event):
+            if play_button.update(
+                    event) or event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
                 play()
             if skins[list(skins.keys())[car_skin]][0] == 'locked':
-                if lock_button.update(event):
+                if lock_button.update(
+                        event) or event.type == pygame.KEYDOWN and event.key == pygame.K_e:
                     if coins_count.coins_count - \
                             skins[list(skins.keys())[car_skin]][1] >= 0:
                         skins[list(skins.keys())[car_skin]][0] = 'open'
@@ -326,7 +364,8 @@ def main_menu():
                         coins_count.coins_count = coins_count.coins_count - \
                                                   skins[list(skins.keys())[
                                                       car_skin]][1]
-            if arrow_left.update(event):
+            if arrow_left.update(
+                    event) or event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                 if car_skin - 1 < 0:
                     car_skin = len(skins) - 1
                 else:
@@ -340,7 +379,8 @@ def main_menu():
                 skin_info.set_text(skin_info_msg)
                 skin_info.dest = (
                     (size[0] - skin_info.render.get_width()) // 2, 350)
-            if arrow_right.update(event):
+            if arrow_right.update(
+                    event) or event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                 if car_skin + 1 > len(skins) - 1:
                     car_skin = 0
                 else:
@@ -354,10 +394,16 @@ def main_menu():
                 skin_info.set_text(skin_info_msg)
                 skin_info.dest = (
                     (size[0] - skin_info.render.get_width()) // 2, 350)
-            if settings_button.update(event):
+            if settings_button.update(event) or event.type == pygame.KEYDOWN and event.key == pygame.K_s:
                 settings()
-            if road_button.update(event):
+            if road_button.update(event) or event.type == pygame.KEYDOWN and event.key == pygame.K_r:
                 road_menu()
+
+            if event.type == pygame.KEYDOWN:
+                if event.key == pygame.K_F3:
+                    settings_file['render_hints'] = int(
+                        not bool(settings_file['render_hints']))
+                    print(settings_file['render_hints'])
 
         screen.fill(pygame.Color('black'))
 
@@ -369,8 +415,18 @@ def main_menu():
         if skins[list(skins.keys())[car_skin]][0] == 'locked':
             skin_info.update()
             lock_button_group.draw(screen)
+            render_hint('[E]', lock_button.rect)
 
         score_label.update()
+
+        render_hint('[Space]', play_button.rect, settings_file['render_hints'])
+        render_hint('[Left arrow]', arrow_left.rect,
+                    settings_file['render_hints'])
+        render_hint('[Right arrow]', arrow_right.rect,
+                    settings_file['render_hints'])
+        render_hint('[S]', settings_button.rect, settings_file['render_hints'])
+        render_hint('[R]', road_button.rect,
+                    settings_file['render_hints'])
 
         road.update()
         screen.blit(load_image('line'), (-10, 0))
@@ -423,6 +479,10 @@ def settings():
                          load_image('buttons/back_hl'), (12, 560),
                          menu_sprites)
 
+    information_button = Button(load_image('buttons/information'),
+                         load_image('buttons/information_hl'), (396, 560),
+                         menu_sprites)
+
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -447,9 +507,18 @@ def settings():
             if back_button.update(event):
                 main_menu()
 
+            if information_button.update(event):
+                secret_sfx = pygame.mixer.Sound('assets/sfx/Secret.mp3')
+                secret_sfx.set_volume(0.2)
+                secret_sfx.play()
+
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     main_menu()
+                if event.key == pygame.K_F3:
+                    settings_file['render_hints'] = int(
+                        not bool(settings_file['render_hints']))
+                    print(settings_file['render_hints'])
 
         screen.fill(pygame.Color('black'))
 
@@ -459,6 +528,9 @@ def settings():
         menu_sprites.draw(screen)
 
         road.update()
+
+        render_hint('[Esc]', back_button.rect, settings_file['render_hints'])
+        render_hint('[F3]', information_button.rect, settings_file['render_hints'])
 
         screen.blit(load_image('line'), (-10, 0))
 
@@ -515,18 +587,28 @@ def road_menu():
                 close(current_song, coins_count.coins_count, main_skin,
                       main_road_skin, skins, road_skins)
             if road_skins[list(road_skins.keys())[road_skin]][0] == 'locked':
-                if lock_button.update(event):
+                if lock_button.update(
+                        event) or event.type == pygame.KEYDOWN and event.key == pygame.K_e:
                     if coins_count.coins_count - \
-                            road_skins[list(road_skins.keys())[road_skin]][1] >= 0:
-                        road_skins[list(road_skins.keys())[road_skin]][0] = 'open'
+                            road_skins[list(road_skins.keys())[road_skin]][
+                                1] >= 0:
+                        road_skins[list(road_skins.keys())[road_skin]][
+                            0] = 'open'
                         main_road_skin = road_skin
                         coins_count.coins_count = coins_count.coins_count - \
-                                                  road_skins[list(road_skins.keys())[
-                                                      road_skin]][1]
+                                                  road_skins[
+                                                      list(road_skins.keys())[
+                                                          road_skin]][1]
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
                     main_menu()
-            if arrow_left.update(event):
+                if event.key == pygame.K_F3:
+                    settings_file['render_hints'] = int(
+                        not bool(settings_file['render_hints']))
+                    print(settings_file['render_hints'])
+
+            if arrow_left.update(
+                    event) or event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
                 if road_skin - 1 < 0:
                     road_skin = len(road_skins) - 1
                 else:
@@ -542,7 +624,8 @@ def road_menu():
                 skin_info.dest = (
                     (size[0] - skin_info.render.get_width()) // 2, 350)
 
-            if arrow_right.update(event):
+            if arrow_right.update(
+                    event) or event.type == pygame.KEYDOWN and event.key == pygame.K_RIGHT:
                 if road_skin + 1 > len(road_skins) - 1:
                     road_skin = 0
                 else:
@@ -569,6 +652,12 @@ def road_menu():
 
         road.update()
 
+        render_hint('[Esc]', back_button.rect, settings_file['render_hints'])
+        render_hint('[Left arrow]', arrow_left.rect,
+                    settings_file['render_hints'])
+        render_hint('[Right arrow]', arrow_right.rect,
+                    settings_file['render_hints'])
+
         screen.blit(load_image('line'), (-10, 0))
 
         label.update()
@@ -577,6 +666,8 @@ def road_menu():
         if road_skins[list(road_skins.keys())[road_skin]][0] == 'locked':
             skin_info.update()
             lock_button_group.draw(screen)
+            render_hint('[E]', lock_button.rect,
+                        settings_file['render_hints'])
 
         clock.tick(fps)
         pygame.display.update()
