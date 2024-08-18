@@ -4,11 +4,20 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Prices changed">
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/restart.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/buttons/restart_hl.png" afterDir="false" />
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Buttons hints made, restart added, secret added (go find it)">
+      <change afterPath="$PROJECT_DIR$/assets/sfx/Crash.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sfx/SpannerPickup.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sprites/hit_particle.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sprites/spanner.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sprites/spanner_big.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/assets/sprites/spanner_empty.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/assets/sprites/line.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/line.png" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/coins_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/collectibles_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,9 +74,9 @@
       <recent name="$PROJECT_DIR$/assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets/sprites" />
       <recent name="$PROJECT_DIR$/assets/sfx" />
+      <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
       <recent name="$PROJECT_DIR$/assets" />
       <recent name="$PROJECT_DIR$/assets/music" />
     </key>
@@ -296,7 +305,15 @@
       <option name="project" value="LOCAL" />
       <updated>1723822536482</updated>
     </task>
-    <option name="localTasksCounter" value="24" />
+    <task id="LOCAL-00024" summary="Buttons hints made, restart added, secret added (go find it)">
+      <option name="closed" value="true" />
+      <created>1723836305930</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1723836305930</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -331,6 +348,7 @@
     <MESSAGE value="More road skins added, car prices changed" />
     <MESSAGE value="Coins spawn system modified" />
     <MESSAGE value="Prices changed" />
-    <option name="LAST_COMMIT_MESSAGE" value="Prices changed" />
+    <MESSAGE value="Buttons hints made, restart added, secret added (go find it)" />
+    <option name="LAST_COMMIT_MESSAGE" value="Buttons hints made, restart added, secret added (go find it)" />
   </component>
 </project>

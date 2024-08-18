@@ -49,7 +49,6 @@ def set_music(track):
         pygame.mixer.music.load(f'assets/music/{track}.mp3')
         pygame.mixer.music.set_volume(1)
         pygame.mixer.music.play(-1)
-    print(f'Music: {track}.')
 
 
 def change_song(screen, size, music, current_song):

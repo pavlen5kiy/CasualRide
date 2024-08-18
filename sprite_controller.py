@@ -51,8 +51,9 @@ class Car(Sprite):
         self.rect.x + self.rect.width // 2 - 22, self.rect.y + 12)
         self.npc_group = npc_group
         self.road = road
+        self.tick = 120
 
-    def update(self, particles_group):
+    def update(self, particles_group, hit_particles_group=None):
 
         if 30 <= self.rect.x + self.x_speed * self.x_movement <= 390:
             self.rect.x += self.x_speed * self.x_movement
@@ -85,9 +86,21 @@ class Car(Sprite):
             self.image = self.default_image
 
         for npc in self.npc_group:
-            if self.hitbox.colliderect(npc.hitbox):
+            if self.hitbox.colliderect(npc.hitbox) and self.tick == 120:
+                sfx = pygame.mixer.Sound('assets/sfx/Crash.wav')
+                sfx.set_volume(0.5)
+                sfx.play()
+
+                create_particles(
+                    (self.rect.x + self.rect.width // 2 - 6, self.rect.y),
+                    generate_particles('hit_particle'), 50, 30, 2, hit_particles_group)
+
+                self.tick = 0
                 return True
             pass
+
+        if self.tick < 120:
+            self.tick += 1
 
         create_particles(
             (self.rect.x + self.rect.width // 2 - 6, self.rect.y + 90),
@@ -169,7 +182,7 @@ def create_particles(position, particles, particle_count, speed, direction,
 
 def generate_particles(filename):
     particles = [load_image(filename)]
-    for scale in range(1, 20):
+    for scale in [1, 5, 10, 15, 20]:
         particles.append(pygame.transform.scale(particles[0], (scale, scale)))
     return particles
 
@@ -191,6 +204,8 @@ class Coin(Sprite):
             sfx = pygame.mixer.Sound('assets/sfx/CoinPickup.mp3')
             sfx.set_volume(0.5)
             sfx.play()
+            self.kill()
+        if self.rect.y > 750:
             self.kill()
 
 
@@ -229,3 +244,26 @@ class Button(Sprite):
             return True
 
         return False
+
+
+class Spanner(Sprite):
+    def __init__(self, pos, car, road, health, *group):
+        super().__init__(*group)
+        self.image = load_image('spanner_big')
+        self.rect = self.image.get_rect()
+        self.rect.topleft = pos
+        self.car = car
+        self.health = health
+        self.road = road
+
+    def update(self):
+        self.rect.y += self.road.speed
+        if self.rect.colliderect(self.car.rect):
+            if self.health.health < 3:
+                self.health.health += 1
+            sfx = pygame.mixer.Sound('assets/sfx/SpannerPickup.wav')
+            sfx.set_volume(0.5)
+            sfx.play()
+            self.kill()
+        if self.rect.y > 750:
+            self.kill()

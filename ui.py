@@ -34,10 +34,14 @@ class ScoreLabel(Text):
         super().__init__(screen, screen_size, font_size, message, color,
                          dest)
         self.road = road
+        self.screen_size = screen_size
 
-    def update(self):
+    def update(self, dynamic_update=False):
         message = ''.join((self.message, str(self.road.score)))
         self.render = self.font.render(message, True, self.color)
+        if dynamic_update:
+            self.dest = (
+                (self.screen_size[0] // 2 - self.render.get_width() // 2), 12)
         self.screen.blit(self.render, self.dest)
 
 
@@ -91,7 +95,7 @@ class CoinsCount(Text):
 
     def update(self):
         self.render = self.font.render(str(self.coins_count), True, self.color)
-        self.dest = (self.width - self.render.get_width() - 60, 17)
+        self.dest = (self.width - self.render.get_width() - 60, 20)
         coin_image = load_image('coin_small')
         self.screen.blit(self.render, self.dest)
         self.screen.blit(coin_image, (430, 10))
@@ -116,3 +120,20 @@ class HiddenText(Text):
                                          hidden_msg_render.get_width() + 8,
                                          hidden_msg_render.get_height() + 8))
             self.screen.blit(hidden_msg_render, (pygame.mouse.get_pos()[0] + 14 + 4 - 70 , pygame.mouse.get_pos()[1] + 14 + 4))
+
+
+class Health(Ui):
+    def __init__(self, screen, screen_size, dest):
+        super().__init__(screen, screen_size)
+        self.health = 3
+        self.full = load_image('spanner')
+        self.empty = load_image('spanner_empty')
+        self.dest = dest
+
+    def update(self):
+        for i in range(3):
+            if i > self.health - 1:
+                self.screen.blit(self.empty,
+                                 (self.dest[0] + 50 * i, self.dest[1]))
+            else:
+                self.screen.blit(self.full, (self.dest[0] + 50 * i, self.dest[1]))

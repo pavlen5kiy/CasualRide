@@ -5,7 +5,7 @@ import sys
 
 from npc_controller import *
 from utility import *
-from coins_controller import *
+from collectibles_controller import *
 from load_image import load_image
 
 music = ['CasualRide', 'HighwayToTheWest', 'OnMyWay', '47WeeksOnTheRoad',
@@ -90,8 +90,9 @@ def play():
     home_button_group = pygame.sprite.Group()
     sprites = pygame.sprite.Group()
     particles = pygame.sprite.Group()
+    hit_particles = pygame.sprite.Group()
     npc_cars = pygame.sprite.Group()
-    coins = pygame.sprite.Group()
+    collectibles = pygame.sprite.Group()
     player = pygame.sprite.Group()
     npc_particles = pygame.sprite.Group()
     overlay_group = pygame.sprite.Group()
@@ -113,6 +114,7 @@ def play():
 
     spawn_tick = 0
     coin_spawn_tick = 0
+    spanner_spawn_tick = 0
 
     lose_label = Text(screen, size, 50, 'You lost!', 'white')
     lose_label.dest = ((size[0] - lose_label.render.get_width()) // 2, 100)
@@ -121,7 +123,7 @@ def play():
     score_lost_label.dest = (
         (size[0] // 2 - score_lost_label.render.get_width() // 2) - 20, 150)
 
-    score_label = ScoreLabel(screen, size, 40, '', road, 'white', (10, 17))
+    score_label = ScoreLabel(screen, size, 50, '', road, 'white')
 
     pause_label = Text(screen, size, 50, 'Pause', 'white')
     pause_label.dest = ((size[0] - pause_label.render.get_width()) // 2, 10)
@@ -141,6 +143,8 @@ def play():
     warning = Text(screen, size, 15, "Score won't be saved if you leave!",
                    'white')
     warning.dest = ((size[0] - warning.render.get_width()) // 2, 530)
+
+    health = Health(screen, size, (10, 10))
 
     timer_sfx = pygame.mixer.Sound('assets/sfx/Countdown.mp3')
     timer_sfx.set_volume(1)
@@ -191,7 +195,6 @@ def play():
                 if event.key == pygame.K_F3:
                     settings_file['render_hints'] = int(
                         not bool(settings_file['render_hints']))
-                    print(settings_file['render_hints'])
 
                 if event.key == pygame.K_F1:
                     show_rect = not show_rect
@@ -211,8 +214,8 @@ def play():
         if timer.seconds <= 0 and not lost and not paused:
             road.update()
 
-            if car.update(particles):
-                lost = True
+            if car.update(particles, hit_particles):
+                health.health -= 1
 
             if not npc_cars:
                 pass
@@ -224,26 +227,33 @@ def play():
             else:
                 spawn_tick += 1
 
-            for coin in coins:
-                coin.update()
+            for collectible in collectibles:
+                collectible.update()
 
             if coin_spawn_tick == 120:
                 coin_spawn_tick = 0
-                spawn_coins(car, road, coins_count, coins)
+                spawn_coins(car, road, coins_count, collectibles)
+
+            if spanner_spawn_tick == 630:
+                spanner_spawn_tick = 0
+                spawn_spanner(car, road, health, collectibles)
 
             coin_spawn_tick += 1
+            spanner_spawn_tick += 1
 
         particles.update(screen_rect)
         npc_particles.update(screen_rect)
+        hit_particles.update(screen_rect)
 
         screen.fill(pygame.Color('black'))
 
         sprites.draw(screen)
-        coins.draw(screen)
+        collectibles.draw(screen)
         particles.draw(screen)
         player.draw(screen)
         npc_particles.draw(screen)
         npc_cars.draw(screen)
+        hit_particles.draw(screen)
 
         render_hitbox(screen, car, npc_cars, show_rect, show_hitbox)
 
@@ -276,7 +286,9 @@ def play():
                         settings_file['render_hints'])
 
         else:
-            score_label.update()
+            if health.health <= 0:
+                lost = True
+            score_label.update(dynamic_update=True)
 
         if 0 < timer.seconds:
             overlay_group.draw(screen)
@@ -284,6 +296,7 @@ def play():
             timer.update()
 
         coins_count.update()
+        health.update()
 
         if paused:
             overlay_group.draw(screen)
@@ -373,7 +386,6 @@ def main_menu():
                 change_skin(car, list(skins.keys())[car_skin])
                 if skins[list(skins.keys())[car_skin]][0] == 'open':
                     main_skin = car_skin
-                    print(main_skin)
 
                 skin_info_msg = f'{skins[list(skins.keys())[car_skin]][0].capitalize()}. Price: {skins[list(skins.keys())[car_skin]][1]}'
                 skin_info.set_text(skin_info_msg)
@@ -388,7 +400,6 @@ def main_menu():
                 change_skin(car, list(skins.keys())[car_skin])
                 if skins[list(skins.keys())[car_skin]][0] == 'open':
                     main_skin = car_skin
-                    print(main_skin)
 
                 skin_info_msg = f'{skins[list(skins.keys())[car_skin]][0].capitalize()}. Price: {skins[list(skins.keys())[car_skin]][1]}'
                 skin_info.set_text(skin_info_msg)
@@ -403,7 +414,6 @@ def main_menu():
                 if event.key == pygame.K_F3:
                     settings_file['render_hints'] = int(
                         not bool(settings_file['render_hints']))
-                    print(settings_file['render_hints'])
 
         screen.fill(pygame.Color('black'))
 
@@ -518,7 +528,6 @@ def settings():
                 if event.key == pygame.K_F3:
                     settings_file['render_hints'] = int(
                         not bool(settings_file['render_hints']))
-                    print(settings_file['render_hints'])
 
         screen.fill(pygame.Color('black'))
 
@@ -530,7 +539,7 @@ def settings():
         road.update()
 
         render_hint('[Esc]', back_button.rect, settings_file['render_hints'])
-        render_hint('[F3]', information_button.rect, settings_file['render_hints'])
+        render_hint('[F3]', information_button.rect, True)
 
         screen.blit(load_image('line'), (-10, 0))
 
@@ -605,7 +614,6 @@ def road_menu():
                 if event.key == pygame.K_F3:
                     settings_file['render_hints'] = int(
                         not bool(settings_file['render_hints']))
-                    print(settings_file['render_hints'])
 
             if arrow_left.update(
                     event) or event.type == pygame.KEYDOWN and event.key == pygame.K_LEFT:
@@ -617,7 +625,6 @@ def road_menu():
 
                 if road_skins[list(road_skins.keys())[road_skin]][0] == 'open':
                     main_road_skin = road_skin
-                    print(main_road_skin)
 
                 skin_info_msg = f'{road_skins[list(road_skins.keys())[road_skin]][0].capitalize()}. Price: {road_skins[list(road_skins.keys())[road_skin]][1]}'
                 skin_info.set_text(skin_info_msg)
@@ -634,7 +641,6 @@ def road_menu():
 
                 if road_skins[list(road_skins.keys())[road_skin]][0] == 'open':
                     main_road_skin = road_skin
-                    print(main_road_skin)
 
                 skin_info_msg = f'{road_skins[list(road_skins.keys())[road_skin]][0].capitalize()}. Price: {road_skins[list(road_skins.keys())[road_skin]][1]}'
                 skin_info.set_text(skin_info_msg)
@@ -697,7 +703,7 @@ if __name__ == '__main__':
     skins = saving['car_skins']
     road_skins = saving['road_skins']
 
-    coins_count = CoinsCount(screen, size, 40, '#f7e26b')
+    coins_count = CoinsCount(screen, size, 30, '#f7e26b')
     coins_count.coins_count = saving['coins']
     current_song = settings_file['song']
 
