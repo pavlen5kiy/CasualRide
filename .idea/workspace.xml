@@ -5,19 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Buttons hints made, restart added, secret added (go find it)">
-      <change afterPath="$PROJECT_DIR$/assets/sfx/Crash.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sfx/SpannerPickup.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/hit_particle.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/spanner.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/spanner_big.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/assets/sprites/spanner_empty.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/assets/sprites/line.png" beforeDir="false" afterPath="$PROJECT_DIR$/assets/sprites/line.png" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/coins_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/collectibles_controller.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,22 +52,23 @@
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/pavelvolkov/PycharmProjects/carGame/assets/sfx&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/pavelvolkov/PycharmProjects/carGame/dist&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dist" />
       <recent name="$PROJECT_DIR$/assets/sfx" />
       <recent name="$PROJECT_DIR$/assets" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dist/main.app/Contents" />
+      <recent name="$PROJECT_DIR$/dist/main.app" />
       <recent name="$PROJECT_DIR$/assets/sprites" />
       <recent name="$PROJECT_DIR$/assets/sfx" />
       <recent name="$PROJECT_DIR$/assets/sprites/buttons" />
-      <recent name="$PROJECT_DIR$/assets" />
-      <recent name="$PROJECT_DIR$/assets/music" />
     </key>
   </component>
   <component name="RunManager">
@@ -108,7 +98,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-8336bb23522e-31b6be0877a2-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-241.19072.16" />
+        <option value="bundled-python-sdk-abccbe9d933a-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.20224.428" />
       </set>
     </attachedChunks>
   </component>

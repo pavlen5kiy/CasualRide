@@ -2,6 +2,7 @@ import pygame
 import random
 import json
 import sys
+import time
 
 from npc_controller import *
 from utility import *
@@ -67,10 +68,10 @@ def close(*args):
     saving['car_skins'] = skins
     saving['road_skins'] = road_skins
 
-    with open('saving.json', 'w') as f:
+    with open(saving_file_path, 'w') as f:
         json.dump(saving, f)
         print('All scores successfully saved.')
-    with open('settings_file.json', 'w') as f:
+    with open(settings_file_path, 'w') as f:
         json.dump(settings_file, f)
         print('All settings successfully saved.')
 
@@ -685,13 +686,21 @@ if __name__ == '__main__':
     fps = 60
     screen, size, screen_rect = set_screen((480, 640))
 
+    user_home = os.path.expanduser("~")
+    save_dir = os.path.join(user_home, 'CasualRide')
+    if not os.path.exists(save_dir):
+        os.makedirs(save_dir)
+
+    saving_file_path = os.path.join(save_dir, 'saving.json')
+    settings_file_path = os.path.join(save_dir, 'settings_file.json')
+
     try:
-        with open('saving.json') as f:
+        with open(saving_file_path) as f:
             saving = json.load(f)
     except:
         print('No saving file created yet')
     try:
-        with open('settings_file.json') as f:
+        with open(settings_file_path) as f:
             settings_file = json.load(f)
     except:
         print('No settings file created yet')
