@@ -32,7 +32,7 @@ def change_road(road, skin):
 
 
 def set_screen(size):
-    pygame.display.set_caption('Car Game')
+    pygame.display.set_caption('CasualRide')
 
     size = size
     screen = pygame.display.set_mode(size)
