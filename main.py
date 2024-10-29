@@ -1,5 +1,6 @@
 import pygame
 import random
+import os
 import json
 import sys
 import time
@@ -38,6 +39,10 @@ settings_file = {
     'song': 0,
     'render_hints': 0
 }
+
+last_time = time.time()
+dt = time.time() - last_time
+dt *= 60
 
 
 def render_hint(hint, rect, hints_on=0):
@@ -82,6 +87,8 @@ def close(*args):
 def play():
     global main_skin
     global main_road_skin
+    global last_time
+    global dt
 
     timer = Timer(-1, screen, size)
     timer.seconds = 4
@@ -152,6 +159,10 @@ def play():
     timer_sfx.play()
 
     while True:
+        dt = time.time() - last_time
+        dt *= 60
+        last_time = time.time()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 close(current_song, coins_count.coins_count, main_skin,
@@ -213,9 +224,9 @@ def play():
                     car.y_movement = 0
 
         if timer.seconds <= 0 and not lost and not paused:
-            road.update()
+            road.update(dt)
 
-            if car.update(particles, hit_particles):
+            if car.update(particles, dt, hit_particles):
                 health.health -= 1
 
             if not npc_cars:
@@ -224,12 +235,12 @@ def play():
 
             if spawn_tick == 300:
                 for npc in npc_cars:
-                    npc.update(npc_particles)
+                    npc.update(npc_particles, dt)
             else:
                 spawn_tick += 1
 
             for collectible in collectibles:
-                collectible.update()
+                collectible.update(dt)
 
             if coin_spawn_tick == 120:
                 coin_spawn_tick = 0
@@ -242,9 +253,9 @@ def play():
             coin_spawn_tick += 1
             spanner_spawn_tick += 1
 
-        particles.update(screen_rect)
-        npc_particles.update(screen_rect)
-        hit_particles.update(screen_rect)
+        particles.update(screen_rect, dt)
+        npc_particles.update(screen_rect, dt)
+        hit_particles.update(screen_rect, dt)
 
         screen.fill(pygame.Color('black'))
 
@@ -317,6 +328,8 @@ def main_menu():
     global main_road_skin
     global skins
     global main_skin
+    global last_time
+    global dt
 
     menu_sprites = pygame.sprite.Group()
     lock_button_group = pygame.sprite.Group()
@@ -361,6 +374,10 @@ def main_menu():
                        'white', (10, 80))
 
     while True:
+        dt = time.time() - last_time
+        dt *= 60
+        last_time = time.time()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 close(current_song, coins_count.coins_count, main_skin,
@@ -439,7 +456,7 @@ def main_menu():
         render_hint('[R]', road_button.rect,
                     settings_file['render_hints'])
 
-        road.update()
+        road.update(dt)
         screen.blit(load_image('line'), (-10, 0))
 
         label.update()
@@ -453,6 +470,8 @@ def settings():
     global car_skin
     global main_road_skin
     global current_song
+    global last_time
+    global dt
 
     menu_sprites = pygame.sprite.Group()
     sprites = pygame.sprite.Group()
@@ -495,6 +514,10 @@ def settings():
                          menu_sprites)
 
     while True:
+        dt = time.time() - last_time
+        dt *= 60
+        last_time = time.time()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 close(current_song, coins_count.coins_count, main_skin,
@@ -537,7 +560,7 @@ def settings():
         overlay_group.draw(screen)
         menu_sprites.draw(screen)
 
-        road.update()
+        road.update(dt)
 
         render_hint('[Esc]', back_button.rect, settings_file['render_hints'])
         render_hint('[F3]', information_button.rect, True)
@@ -556,6 +579,8 @@ def road_menu():
     global car_skin
     global main_road_skin
     global road_skin
+    global last_time
+    global dt
 
     menu_sprites = pygame.sprite.Group()
     sprites = pygame.sprite.Group()
@@ -592,6 +617,10 @@ def road_menu():
     skin_info.dest = ((size[0] - skin_info.render.get_width()) // 2, 350)
 
     while True:
+        dt = time.time() - last_time
+        dt *= 60
+        last_time = time.time()
+
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 close(current_song, coins_count.coins_count, main_skin,
@@ -657,7 +686,7 @@ def road_menu():
         player.draw(screen)
         menu_sprites.draw(screen)
 
-        road.update()
+        road.update(dt)
 
         render_hint('[Esc]', back_button.rect, settings_file['render_hints'])
         render_hint('[Left arrow]', arrow_left.rect,

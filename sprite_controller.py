@@ -22,7 +22,7 @@ class Road(Sprite):
         self.speed_change = 0
         self.non_changed_speed = 5
 
-    def update(self):
+    def update(self, dt):
         if self.rect.y >= -10:
             self.rect.y = -970
             self.score += 1
@@ -31,8 +31,7 @@ class Road(Sprite):
             (self.default_speed + self.score // 10) - 3 * (
                     self.score // 50) - 2 * (self.score // 100))
         self.speed = self.non_changed_speed + self.speed_change
-        self.rect.y += self.speed
-        # print(self.speed, self.speed_change)
+        self.rect.y += self.speed * dt
 
 
 class Car(Sprite):
@@ -53,11 +52,11 @@ class Car(Sprite):
         self.road = road
         self.tick = 120
 
-    def update(self, particles_group, hit_particles_group=None):
+    def update(self, particles_group, dt, hit_particles_group=None):
 
         if 30 <= self.rect.x + self.x_speed * self.x_movement <= 390:
-            self.rect.x += self.x_speed * self.x_movement
-            self.hitbox.x += self.x_speed * self.x_movement
+            self.rect.x += (self.x_speed * self.x_movement) * dt
+            self.hitbox.x += (self.x_speed * self.x_movement) * dt
 
         speed_change = self.y_speed * -self.y_movement
 
@@ -124,9 +123,9 @@ class NpcCar(Sprite):
         self.speed_change = 0
         self.road = road
 
-    def update(self, particles_group):
-        self.rect.y += self.speed + self.speed_change
-        self.hitbox.y += self.speed + self.speed_change
+    def update(self, particles_group, dt):
+        self.rect.y += (self.speed + self.speed_change) * dt
+        self.hitbox.y += (self.speed + self.speed_change) * dt
         if self.rect.y > 641 or self.rect.y < -400:
             self.kill()
 
@@ -161,9 +160,9 @@ class Particle(Sprite):
         self.tick = 0
         self.max_tick = random.randrange(1, (speed // 2 + 1) * 5)
 
-    def update(self, screen_rect):
-        self.rect.x += self.velocity[0]
-        self.rect.y += self.velocity[1]
+    def update(self, screen_rect, dt):
+        self.rect.x += self.velocity[0] * dt
+        self.rect.y += self.velocity[1] * dt
 
         self.tick += 1
 
@@ -197,8 +196,8 @@ class Coin(Sprite):
         self.coins_count = coins_count
         self.road = road
 
-    def update(self):
-        self.rect.y += self.road.speed
+    def update(self, dt):
+        self.rect.y += self.road.speed * dt
         if self.rect.colliderect(self.car.rect):
             self.coins_count.coins_count += 1
             sfx = pygame.mixer.Sound('assets/sfx/CoinPickup.mp3')
@@ -256,8 +255,8 @@ class Spanner(Sprite):
         self.health = health
         self.road = road
 
-    def update(self):
-        self.rect.y += self.road.speed
+    def update(self, dt):
+        self.rect.y += self.road.speed * dt
         if self.rect.colliderect(self.car.rect):
             if self.health.health < 3:
                 self.health.health += 1

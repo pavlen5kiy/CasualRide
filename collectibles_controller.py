@@ -1,7 +1,4 @@
-import random
-
 from sprite_controller import *
-from utility import *
 
 
 def set_coin(x_pos, car, road, coins_count, sprites):

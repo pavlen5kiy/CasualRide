@@ -4,9 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Buttons hints made, restart added, secret added (go find it)">
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Small changes">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/collectibles_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/collectibles_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/load_image.py" beforeDir="false" afterPath="$PROJECT_DIR$/load_image.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/sprite_controller.py" beforeDir="false" afterPath="$PROJECT_DIR$/sprite_controller.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ui.py" beforeDir="false" afterPath="$PROJECT_DIR$/ui.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/utility.py" beforeDir="false" afterPath="$PROJECT_DIR$/utility.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,13 +57,14 @@
     &quot;Python.main.executor&quot;: &quot;Run&quot;,
     &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
     &quot;git-widget-placeholder&quot;: &quot;main&quot;,
-    &quot;last_opened_file_path&quot;: &quot;/Users/pavelvolkov/PycharmProjects/carGame/dist&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/pavelvolkov/PycharmProjects/carGame/dist/main.app/Contents/Resources&quot;,
     &quot;run.code.analysis.last.selected.profile&quot;: &quot;aDefault&quot;,
     &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;
   }
 }</component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/dist/main.app/Contents/Resources" />
       <recent name="$PROJECT_DIR$/dist" />
       <recent name="$PROJECT_DIR$/assets/sfx" />
       <recent name="$PROJECT_DIR$/assets" />
@@ -98,7 +104,7 @@
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
-        <option value="bundled-python-sdk-abccbe9d933a-ba05f1cad1b1-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.20224.428" />
+        <option value="bundled-python-sdk-d7ad00fb9fc3-c546a90a8094-com.jetbrains.pycharm.community.sharedIndexes.bundled-PC-242.23726.102" />
       </set>
     </attachedChunks>
   </component>
@@ -303,7 +309,23 @@
       <option name="project" value="LOCAL" />
       <updated>1723836305930</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Saving system modified">
+      <option name="closed" value="true" />
+      <created>1724749491451</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1724749491451</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Small changes">
+      <option name="closed" value="true" />
+      <created>1724749797667</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1724749797667</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -333,12 +355,13 @@
     <MESSAGE value="Saving system added, buttons colors changed" />
     <MESSAGE value="requirements.txt added" />
     <MESSAGE value="More menus added, car skins store added, music settings modified, button sound changed (same sound but equalized)" />
-    <MESSAGE value="Small changes" />
     <MESSAGE value="Road skin shop added" />
     <MESSAGE value="More road skins added, car prices changed" />
     <MESSAGE value="Coins spawn system modified" />
     <MESSAGE value="Prices changed" />
     <MESSAGE value="Buttons hints made, restart added, secret added (go find it)" />
-    <option name="LAST_COMMIT_MESSAGE" value="Buttons hints made, restart added, secret added (go find it)" />
+    <MESSAGE value="Saving system modified" />
+    <MESSAGE value="Small changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Small changes" />
   </component>
 </project>
