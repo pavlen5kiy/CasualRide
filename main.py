@@ -715,30 +715,25 @@ async def road_menu():
         await asyncio.sleep(0)
 
 
-if __name__ == '__main__':
+async def main():
+    global screen
+    global size
+    global fps
+    global clock
+    global car_skin
+    global main_skin
+    global road_skin
+    global main_road_skin
+    global skins
+    global road_skins
+    global coins_count
+    global current_song
+    global screen_rect
+
     pygame.init()
     clock = pygame.time.Clock()
     fps = 60
     screen, size, screen_rect = set_screen((480, 640))
-
-    # user_home = os.path.expanduser("~")
-    # save_dir = os.path.join(user_home, 'CasualRide')
-    # if not os.path.exists(save_dir):
-    #     os.makedirs(save_dir)
-    #
-    # saving_file_path = os.path.join(save_dir, 'saving.json')
-    # settings_file_path = os.path.join(save_dir, 'settings_file.json')
-    #
-    # try:
-    #     with open(saving_file_path) as f:
-    #         saving = json.load(f)
-    # except:
-    #     print('No saving file created yet')
-    # try:
-    #     with open(settings_file_path) as f:
-    #         settings_file = json.load(f)
-    # except:
-    #     print('No settings file created yet')
 
     car_skin = saving['car_skin']
     main_skin = car_skin
@@ -753,6 +748,8 @@ if __name__ == '__main__':
 
     set_music(music[current_song])
 
-    asyncio.run(main_menu())
-    close(current_song, coins_count.coins_count, main_skin,
-          main_road_skin, skins, road_skins)
+    await main_menu()
+
+
+if __name__ == '__main__':
+    asyncio.run(main())

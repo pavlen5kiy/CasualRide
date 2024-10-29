@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Frame independence implemented">
+    <list default="true" id="4f523348-fcf1-4a30-ae22-f6afa3c84137" name="Changes" comment="Preparing for test web conversion">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.py" beforeDir="false" afterPath="$PROJECT_DIR$/main.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -327,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1730190191152</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Preparing for test web conversion">
+      <option name="closed" value="true" />
+      <created>1730193025313</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1730193025313</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -365,6 +374,7 @@
     <MESSAGE value="Saving system modified" />
     <MESSAGE value="Small changes" />
     <MESSAGE value="Frame independence implemented" />
-    <option name="LAST_COMMIT_MESSAGE" value="Frame independence implemented" />
+    <MESSAGE value="Preparing for test web conversion" />
+    <option name="LAST_COMMIT_MESSAGE" value="Preparing for test web conversion" />
   </component>
 </project>
