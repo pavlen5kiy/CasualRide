@@ -1,3 +1,5 @@
+import asyncio
+
 import pygame
 import random
 import os
@@ -73,18 +75,18 @@ def close(*args):
     saving['car_skins'] = skins
     saving['road_skins'] = road_skins
 
-    with open(saving_file_path, 'w') as f:
-        json.dump(saving, f)
-        print('All scores successfully saved.')
-    with open(settings_file_path, 'w') as f:
-        json.dump(settings_file, f)
-        print('All settings successfully saved.')
+    # with open(saving_file_path, 'w') as f:
+    #     json.dump(saving, f)
+    #     print('All scores successfully saved.')
+    # with open(settings_file_path, 'w') as f:
+    #     json.dump(settings_file, f)
+    #     print('All settings successfully saved.')
 
     pygame.quit()
     sys.exit()
 
 
-def play():
+async def play():
     global main_skin
     global main_road_skin
     global last_time
@@ -170,21 +172,21 @@ def play():
 
             if paused:
                 if home_button.update(event):
-                    main_menu()
+                    await main_menu()
 
                 if continue_button.update(event):
                     paused = not paused
 
             if lost:
                 if home_button.update(event):
-                    main_menu()
+                    await main_menu()
                 if restart_button.update(event):
-                    play()
+                    await play()
 
             if event.type == pygame.KEYDOWN:
                 if lost:
                     if event.key == pygame.K_r:
-                        play()
+                        await play()
 
                 if event.key == pygame.K_a or event.key == pygame.K_LEFT:
                     if car.rect.x >= 0:
@@ -203,7 +205,7 @@ def play():
                     if not lost and timer.seconds <= 0:
                         paused = not paused
                     elif lost:
-                        main_menu()
+                        await main_menu()
                 if event.key == pygame.K_F3:
                     settings_file['render_hints'] = int(
                         not bool(settings_file['render_hints']))
@@ -320,10 +322,11 @@ def play():
                         settings_file['render_hints'])
 
         clock.tick(fps)
-        pygame.display.update()
+        pygame.display.flip()
+        await asyncio.sleep(0)
 
 
-def main_menu():
+async def main_menu():
     global car_skin
     global main_road_skin
     global skins
@@ -384,7 +387,7 @@ def main_menu():
                       main_road_skin, skins, road_skins)
             if play_button.update(
                     event) or event.type == pygame.KEYDOWN and event.key == pygame.K_SPACE:
-                play()
+                await play()
             if skins[list(skins.keys())[car_skin]][0] == 'locked':
                 if lock_button.update(
                         event) or event.type == pygame.KEYDOWN and event.key == pygame.K_e:
@@ -424,9 +427,9 @@ def main_menu():
                 skin_info.dest = (
                     (size[0] - skin_info.render.get_width()) // 2, 350)
             if settings_button.update(event) or event.type == pygame.KEYDOWN and event.key == pygame.K_s:
-                settings()
+                await settings()
             if road_button.update(event) or event.type == pygame.KEYDOWN and event.key == pygame.K_r:
-                road_menu()
+                await road_menu()
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_F3:
@@ -463,10 +466,11 @@ def main_menu():
         coins_count.update()
 
         clock.tick(fps)
-        pygame.display.update()
+        pygame.display.flip()
+        await asyncio.sleep(0)
 
 
-def settings():
+async def settings():
     global car_skin
     global main_road_skin
     global current_song
@@ -539,7 +543,7 @@ def settings():
                 settings_file['song'] = current_song
 
             if back_button.update(event):
-                main_menu()
+                await main_menu()
 
             if information_button.update(event):
                 secret_sfx = pygame.mixer.Sound('assets/sfx/Secret.mp3')
@@ -548,7 +552,7 @@ def settings():
 
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    main_menu()
+                    await main_menu()
                 if event.key == pygame.K_F3:
                     settings_file['render_hints'] = int(
                         not bool(settings_file['render_hints']))
@@ -572,10 +576,11 @@ def settings():
         song_name.update(hidden_message=music[current_song])
 
         clock.tick(fps)
-        pygame.display.update()
+        pygame.display.flip()
+        await asyncio.sleep(0)
 
 
-def road_menu():
+async def road_menu():
     global car_skin
     global main_road_skin
     global road_skin
@@ -640,7 +645,7 @@ def road_menu():
                                                           road_skin]][1]
             if event.type == pygame.KEYDOWN:
                 if event.key == pygame.K_ESCAPE:
-                    main_menu()
+                    await main_menu()
                 if event.key == pygame.K_F3:
                     settings_file['render_hints'] = int(
                         not bool(settings_file['render_hints']))
@@ -678,7 +683,7 @@ def road_menu():
                     (size[0] - skin_info.render.get_width()) // 2, 350)
 
             if back_button.update(event):
-                main_menu()
+                await main_menu()
 
         screen.fill(pygame.Color('black'))
 
@@ -706,7 +711,8 @@ def road_menu():
                         settings_file['render_hints'])
 
         clock.tick(fps)
-        pygame.display.update()
+        pygame.display.flip()
+        await asyncio.sleep(0)
 
 
 if __name__ == '__main__':
@@ -715,24 +721,24 @@ if __name__ == '__main__':
     fps = 60
     screen, size, screen_rect = set_screen((480, 640))
 
-    user_home = os.path.expanduser("~")
-    save_dir = os.path.join(user_home, 'CasualRide')
-    if not os.path.exists(save_dir):
-        os.makedirs(save_dir)
-
-    saving_file_path = os.path.join(save_dir, 'saving.json')
-    settings_file_path = os.path.join(save_dir, 'settings_file.json')
-
-    try:
-        with open(saving_file_path) as f:
-            saving = json.load(f)
-    except:
-        print('No saving file created yet')
-    try:
-        with open(settings_file_path) as f:
-            settings_file = json.load(f)
-    except:
-        print('No settings file created yet')
+    # user_home = os.path.expanduser("~")
+    # save_dir = os.path.join(user_home, 'CasualRide')
+    # if not os.path.exists(save_dir):
+    #     os.makedirs(save_dir)
+    #
+    # saving_file_path = os.path.join(save_dir, 'saving.json')
+    # settings_file_path = os.path.join(save_dir, 'settings_file.json')
+    #
+    # try:
+    #     with open(saving_file_path) as f:
+    #         saving = json.load(f)
+    # except:
+    #     print('No saving file created yet')
+    # try:
+    #     with open(settings_file_path) as f:
+    #         settings_file = json.load(f)
+    # except:
+    #     print('No settings file created yet')
 
     car_skin = saving['car_skin']
     main_skin = car_skin
@@ -747,6 +753,6 @@ if __name__ == '__main__':
 
     set_music(music[current_song])
 
-    main_menu()
+    asyncio.run(main_menu())
     close(current_song, coins_count.coins_count, main_skin,
           main_road_skin, skins, road_skins)
