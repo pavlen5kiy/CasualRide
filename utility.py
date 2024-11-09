@@ -1,3 +1,5 @@
+import pygame
+
 from ui import *
 
 
@@ -31,7 +33,7 @@ def set_screen(size):
     pygame.display.set_caption('CasualRide')
 
     size = size
-    screen = pygame.display.set_mode(size)
+    screen = pygame.display.set_mode(size, pygame.DOUBLEBUF)
     screen_rect = (0, 0, size[0], size[1])
 
     return screen, size, screen_rect
